@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install: 
+    runtime-versions:
+      golang: 1.13
+    commands:
+      - go get -u golang.org/x/lint/golint
+      - yum -y install squashfs-tools
+      - gem install fpm
+
+  pre_build: 
+    commands:
+      - golint -set_exit_status
+      - go test
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - go build -o helloapp
+      - ./makefpm
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+artifacts:
+  files:
+    - helloapp
+    - ./helloapp-latest-amd64.rpm
+    - ./helloapp-latest-amd64.deb
+  discard-paths: yes

@@ -29,7 +29,7 @@ Systemdateien und Programme, die mithilfe von `apt` installiert wurden, befinden
 
 https://github.com/Tornado3P9/Konsolentools/blob/master/Custom_Debian_Package/make_file_structure.sh  
 
-![debianpackage structure](debianpackage_structure.png)
+![debianpackage structure](pics/debianpackage_structure.png)
 
 Das kleinste Debianpaket enthält lediglich den Ordner `DEBIAN` mit der Konfigurationsdatei `control`, in dem die Informationen stehen, die angezeigt werden,  
 wenn man das Paket z.B. mit Befehl `apt show debianpaket.deb` aufruft. Eine Beispielausgabe würde wohl Entwicklernamen, Lizenzen, CPU-Architektur oder auch die Programmversion enthalten.  

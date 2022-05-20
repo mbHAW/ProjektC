@@ -27,6 +27,14 @@ phases:
 artifacts:
   files:
     - helloapp
-    - ./helloapp-latest-amd64.rpm
-    - ./helloapp-latest-amd64.deb
+    - buildspec.yml
   discard-paths: yes
+  secondary-artifacts:
+      rpm:
+        files:
+          - ./helloapp-latest-amd64.rpm
+        discard-paths: yes
+      deb:
+        files:
+          - ./helloapp-latest-amd64.deb
+        discard-paths: yes

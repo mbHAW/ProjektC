@@ -28,55 +28,55 @@ terraform apply --auto-approve  # Apply the new changes in your project without 
 
 
 ## Using Shell script in Terraform "user_data"
-[Terraform AWS EC2 user_data example](https://www.middlewareinventory.com/blog/terraform-aws-ec2-user_data-example/) - middlewareinventory.com
-[Terraform Course demo-10](https://github.com/wardviaene/terraform-course/tree/master/demo-10) - github.com
-[How to use terraform with user_data and cloudinit() on AWS](https://linuxinuse.com/devopsblog/use-terraform-modules/) - linuxinuse.com
+[Terraform AWS EC2 user_data example](https://www.middlewareinventory.com/blog/terraform-aws-ec2-user_data-example/) - middlewareinventory.com  
+[Terraform Course demo-10](https://github.com/wardviaene/terraform-course/tree/master/demo-10) - github.com  
+[How to use terraform with user_data and cloudinit() on AWS](https://linuxinuse.com/devopsblog/use-terraform-modules/) - linuxinuse.com  
 
 Damit kann ich bei der AWS-Instance-Erstellung ein ShellScript ausführen lassen, dass alle nötigen Dependencies nachinstalliert und sonstige Einstellungen vornimmt.
 Das vereinfacht dann vielleicht generell das Setup, wenn ich mit Terraform lediglich eine ganz simple Standard-Instance erstelle und den sonstigen Kram, wie gewohnt, mit Shellscript.
 
 ## Terraform s3 Bucket
-um zu wissen, was da reingehört, wenn man ein aws s3 bucket zum storen von dem state file benutzen will, dann einfach direkt bei terraform nachschauen:
-[Terraform Settings -> Backends -> Available Backends](https://www.terraform.io/language/settings/backends/s3)
-Die haben auch gleich die Infos für all die anderen service provider.
+um zu wissen, was da reingehört, wenn man ein aws s3 bucket zum storen von dem state file benutzen will, dann einfach direkt bei terraform nachschauen:  
+[Terraform Settings -> Backends -> Available Backends](https://www.terraform.io/language/settings/backends/s3)  
+Die haben auch gleich die Infos für all die anderen service provider.  
 
 ## Links
-[Beginners Tutorial to Terraform with AWS - Wahl Network](https://youtu.be/XxTcw7UTues) - Youtube
-[Terraform AWS Example – Create EC2 instance with Terraform](https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/) - middlewareinventory.com
-[ec2-instance-connect](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-set-up.html) - docs.aws.amazon.com
-[Terraform AWS EC2 user_data example](https://www.middlewareinventory.com/blog/terraform-aws-ec2-user_data-example/) - middlewareinventory.com
-[user_data - using templates in Terraform](https://github.com/wardviaene/terraform-course/tree/master/demo-10) - github.com
-[Install Packer](https://www.packer.io/docs/install) - packer.io
-[Devops blog - How to use terraform with user_data and cloudinit() on AWS](https://linuxinuse.com/devopsblog/use-terraform-modules/) - linuxinuse.com
-[SSM - Resource: aws_sqs_queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue) - registry.terraform.io
-[Using Terraform Workspace on AWS for multi account, multi environment deployments](https://alessandromarinoac.com/posts/iac/terraform/terraform-workspaces-multiple-accounts/) - alessandromarinoac.com
-[Named profiles for the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) - docs.aws.amazon.com
-[Terraform workspaces](https://jhooq.com/terraform-workspaces/#5-how-to-use-the-name-of-current-workspace-using-terraformworkspace-interpolation) - jhooq.com
-[wardviaene-terraform-course - Github](https://github.com/wardviaene/terraform-course) - github.com
-[Modules](https://registry.terraform.io/browse/modules) - registry.terraform.io
-[Terraform Get Started - AWS](https://learn.hashicorp.com/collections/terraform/aws-get-started) - learn.hashicorp.com
-[backend](https://www.terraform.io/language/settings/backends/configuration#partial-configuration) - terraform.io
-[State](https://www.terraform.io/language/state) - terraform.io
-[Terraform Workspaces](https://www.bitslovers.com/terraform-workspaces/) - bitslovers.com
-[How To Use Terraform and Remote State with S3](https://medium.com/hootsuite-engineering/how-to-use-terraform-and-remote-state-with-s3-ed4320ee324a) - medium.com
-[Terraform State](https://www.bitslovers.com/terraform-state/) - bitslovers.com
-[Terraform Installation](https://www.terraform.io/cli/install/apt) - terraform.io
-[Terraform workspace to deploy multiple environment stack](https://tech.david-cheong.com/terraform-workspace-to-deploy-multiple-environment-stack/) - tech.david-cheong.com
-[What are Terraform Workspaces](https://pilotcoresystems.com/insights/what-are-terraform-workspaces) - pilotcoresystems.com
-[Terraform Language Documentation](https://www.terraform.io/language) - terraform.io
-[describe-images](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html) - docs.aws.amazon.com
-[Terraform examples from YouTube course - WillBrock](https://github.com/WillBrock/terraform-course-examples) - github.com
-[Terraform - Official](https://www.terraform.io/) - terraform.io
-[Expressions](https://www.terraform.io/language/expressions) - terraform.io
-[Build Infrastructure - Terraform AWS Example](https://learn.hashicorp.com/tutorials/terraform/aws-build) - learn.hashicorp.com
-[Managing Workspaces](https://www.terraform.io/cli/workspaces) - terraform.io
-[Moving resources from the default workspace to a new one on Terraform.](https://dev.to/igordcsouzaaa/migrating-resources-from-the-default-workspace-to-a-new-one-3ojc) - dev.to
-[In Terraform is it possible to move to state from one workspace to another](https://stackoverflow.com/questions/66979732/in-terraform-is-it-possible-to-move-to-state-from-one-workspace-to-another) - stackoverflow.com
-[Terraform Tutorial - Playlist - Will Brock](https://www.youtube.com/playlist?list=PL8HowI-L-3_9bkocmR3JahQ4Y-Pbqs2Nt) - youtube.com
-[IAM - Resource: aws_iam_user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) - registry.terraform.io
-[AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) - registry.terraform.io
-[Amazon EC2 AMI Locator](https://cloud-images.ubuntu.com/locator/ec2) - cloud-images.ubuntu.com
-[A Beginner's Guide to Terraform | Infrastructure as Code - Linode](https://youtu.be/C3ptdKC9-EQ) - youtu.be
-[Build specification reference for CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) - docs.aws.amazon.com
-[Run builds locally with the AWS CodeBuild agent](https://docs.aws.amazon.com/codebuild/latest/userguide/use-codebuild-agent.html) - docs.aws.amazon.com
+[Beginners Tutorial to Terraform with AWS - Wahl Network](https://youtu.be/XxTcw7UTues) - Youtube  
+[Terraform AWS Example – Create EC2 instance with Terraform](https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/) - middlewareinventory.com  
+[ec2-instance-connect](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-set-up.html) - docs.aws.amazon.com  
+[Terraform AWS EC2 user_data example](https://www.middlewareinventory.com/blog/terraform-aws-ec2-user_data-example/) - middlewareinventory.com  
+[user_data - using templates in Terraform](https://github.com/wardviaene/terraform-course/tree/master/demo-10) - github.com  
+[Install Packer](https://www.packer.io/docs/install) - packer.io  
+[Devops blog - How to use terraform with user_data and cloudinit() on AWS](https://linuxinuse.com/devopsblog/use-terraform-modules/) - linuxinuse.com  
+[SSM - Resource: aws_sqs_queue](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sqs_queue) - registry.terraform.io  
+[Using Terraform Workspace on AWS for multi account, multi environment deployments](https://alessandromarinoac.com/posts/iac/terraform/terraform-workspaces-multiple-accounts/) - alessandromarinoac.com  
+[Named profiles for the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) - docs.aws.amazon.com  
+[Terraform workspaces](https://jhooq.com/terraform-workspaces/#5-how-to-use-the-name-of-current-workspace-using-terraformworkspace-interpolation) - jhooq.com  
+[wardviaene-terraform-course - Github](https://github.com/wardviaene/terraform-course) - github.com  
+[Modules](https://registry.terraform.io/browse/modules) - registry.terraform.io  
+[Terraform Get Started - AWS](https://learn.hashicorp.com/collections/terraform/aws-get-started) - learn.hashicorp.com  
+[backend](https://www.terraform.io/language/settings/backends/configuration#partial-configuration) - terraform.io  
+[State](https://www.terraform.io/language/state) - terraform.io  
+[Terraform Workspaces](https://www.bitslovers.com/terraform-workspaces/) - bitslovers.com  
+[How To Use Terraform and Remote State with S3](https://medium.com/hootsuite-engineering/how-to-use-terraform-and-remote-state-with-s3-ed4320ee324a) - medium.com  
+[Terraform State](https://www.bitslovers.com/terraform-state/) - bitslovers.com  
+[Terraform Installation](https://www.terraform.io/cli/install/apt) - terraform.io  
+[Terraform workspace to deploy multiple environment stack](https://tech.david-cheong.com/terraform-workspace-to-deploy-multiple-environment-stack/) - tech.david-cheong.com  
+[What are Terraform Workspaces](https://pilotcoresystems.com/insights/what-are-terraform-workspaces) - pilotcoresystems.com  
+[Terraform Language Documentation](https://www.terraform.io/language) - terraform.io  
+[describe-images](https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html) - docs.aws.amazon.com  
+[Terraform examples from YouTube course - WillBrock](https://github.com/WillBrock/terraform-course-examples) - github.com  
+[Terraform - Official](https://www.terraform.io/) - terraform.io  
+[Expressions](https://www.terraform.io/language/expressions) - terraform.io  
+[Build Infrastructure - Terraform AWS Example](https://learn.hashicorp.com/tutorials/terraform/aws-build) - learn.hashicorp.com  
+[Managing Workspaces](https://www.terraform.io/cli/workspaces) - terraform.io  
+[Moving resources from the default workspace to a new one on Terraform.](https://dev.to/igordcsouzaaa/migrating-resources-from-the-default-workspace-to-a-new-one-3ojc) - dev.to  
+[In Terraform is it possible to move to state from one workspace to another](https://stackoverflow.com/questions/66979732/in-terraform-is-it-possible-to-move-to-state-from-one-workspace-to-another) - stackoverflow.com  
+[Terraform Tutorial - Playlist - Will Brock](https://www.youtube.com/playlist?list=PL8HowI-L-3_9bkocmR3JahQ4Y-Pbqs2Nt) - youtube.com  
+[IAM - Resource: aws_iam_user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user) - registry.terraform.io  
+[AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) - registry.terraform.io  
+[Amazon EC2 AMI Locator](https://cloud-images.ubuntu.com/locator/ec2) - cloud-images.ubuntu.com  
+[A Beginner's Guide to Terraform | Infrastructure as Code - Linode](https://youtu.be/C3ptdKC9-EQ) - youtu.be  
+[Build specification reference for CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) - docs.aws.amazon.com  
+[Run builds locally with the AWS CodeBuild agent](https://docs.aws.amazon.com/codebuild/latest/userguide/use-codebuild-agent.html) - docs.aws.amazon.com  
 

@@ -3,15 +3,9 @@
 - [[rpm]]
 - [[Projekt C - Scripts]]
 
-https://fpm.readthedocs.io/en/latest/index.html  
-https://fpm.readthedocs.io/en/latest/installation.html  
-https://fpm.readthedocs.io/en/latest/cli-reference.html  
-https://github.com/jordansissel/fpm  
-https://www.digitalocean.com/community/tutorials/how-to-use-fpm-to-easily-create-packages-in-multiple-formats  
-
-Das Programm "FPM" reduziert den Arbeitsaufwand enorm, da man sich nur noch auf den Inhalt konzentrieren muss und nicht auf Unterschiede und Eigenheiten zwischen Betriebssystemen.  
-FPM wird inzwischen von vielen Entwicklerstudios verwendet. Z.B. von InfluxData für die Kompilierung von [Telegraf](https://github.com/influxdata/telegraf/blob/577c0462b8a0c0f98e822672091d9cf6916427d9/Makefile) in unterschiedliche Formate gleichzeitig.  
-Das Anlegen einer Ordnerstruktur ist ebenfalls nicht nötig. Alle Quelldateien werden zusammen in einen Ordner gelegt und das Programm FPM von dort aus gestartet.  
+Das Programm "FPM" reduziert den Arbeitsaufwand enorm, da man sich nur noch auf den Inhalt konzentrieren muss und nicht auf Unterschiede und Eigenheiten zwischen Betriebssystemen.
+FPM wird inzwischen von vielen Entwicklerstudios verwendet. Z.B. von InfluxData für die Kompilierung von [Telegraf](https://github.com/influxdata/telegraf/blob/577c0462b8a0c0f98e822672091d9cf6916427d9/Makefile) in unterschiedliche Formate gleichzeitig.
+Das Anlegen einer Ordnerstruktur ist ebenfalls nicht nötig. Alle Quelldateien werden zusammen in einen Ordner gelegt und das Programm FPM von dort aus gestartet.
 
 ### Installation
 
@@ -107,7 +101,7 @@ fpm --force \
 # - RedHat: sudo yum install ./helloapp-latest-amd64.rpm
 # - openSUSE: sudo zypper install ./helloapp-latest-amd64.rpm
 ```
-**Notiz:** Die fpm-Zeile für das Binary wird in der codebuild-Version dann natürlich `target/release/${PROGRAM_NAME}=/usr/bin/${PROGRAM_NAME} \` sein!
+**Notiz:** Die fpm-Zeile für das Binary wird in der codebuild-Version dann manchmal auch so aussehen `target/release/${PROGRAM_NAME}=/usr/bin/${PROGRAM_NAME} \`. Je nach Projekt kann der Zielordner für das fertige Binary ein anderer sein.
 
 #### post-remove.sh
 ```bash
@@ -141,3 +135,11 @@ RestartSec=10
 [Install]
 WantedBy=multi-user.target
 ```
+
+### Links:
+https://fpm.readthedocs.io/en/latest/index.html  
+https://fpm.readthedocs.io/en/latest/installation.html  
+https://fpm.readthedocs.io/en/latest/cli-reference.html  
+https://github.com/jordansissel/fpm  
+https://www.digitalocean.com/community/tutorials/how-to-use-fpm-to-easily-create-packages-in-multiple-formats  
+

@@ -1,10 +1,8 @@
 # Systemd with multiple execStart[^1]
 
-if `Type=simple` in your unit file, you can only specify one ExecStart, but you can add as many `ExecStartPre`, `ExecStartPost`, but none of this is suited for long running commands, because they are executed serially and everything one start is killed before starting the next one.
-
-If `Type=oneshot` you can specify multiple ExecStart, they run serially not in parallel.
-
-If what you want is to run multiple units in parallel, there a few things you can do:
+if `Type=simple` in your unit file, you can only specify one ExecStart, but you can add as many `ExecStartPre`, `ExecStartPost`, but none of this is suited for long running commands, because they are executed serially and everything one start is killed before starting the next one.  
+If `Type=oneshot` you can specify multiple ExecStart, they run serially not in parallel.  
+If what you want is to run multiple units in parallel, there a few things you can do:  
 
 ### If they differ on 1 param
 
@@ -70,11 +68,11 @@ systemctl enable foo@param2.service
 systemctl start bar.target
 ```
 
-**NOTE:** that this works with any type of units not only template units.
+**NOTE:** that this works with any type of units not only template units.  
 
-But note that `systemctl stop bar.target` doesn't stop any of these linked services.
-So you have to either stop each service one by one
-or use the `*` asterisk to apply your command to multiple processes:
+But note that `systemctl stop bar.target` doesn't stop any of these linked services.  
+So you have to either stop each service one by one  
+or use the `*` asterisk to apply your command to multiple processes:  
 
 ```bash
 ## Display all services together:

@@ -1,4 +1,4 @@
-Um mit dem Amazon-Server kommunizieren zu können, müssen vorher dem AWS-Client auf dem Betriebssystem die Rechte vergeben werden.  
+Um mit dem Amazon-Server kommunizieren zu können, müssen vorher dem AWS-Client auf dem Betriebssystem die Rechte vergeben werden.
 Auch wenn es oft möglich ist, dass man die Zugangsdaten manuell angeben kann, so vereinfacht die Verwendung von Profilen die Arbeit mit AWS doch sehr.  
 
 [Installation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html):

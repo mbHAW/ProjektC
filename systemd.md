@@ -144,15 +144,15 @@
 ```
 
 ## Links
-https://www.commandlinux.com/man-page/man5/systemd.service.5.html
-https://linuxhandbook.com/systemd-list-services/
-https://www.flatcar-linux.org/docs/latest/setup/systemd/
-https://www.freedesktop.org/software/systemd/man/systemd.service.html
-https://www.linode.com/docs/guides/start-service-at-boot/
-https://crunchify.com/systemd-upstart-respawn-process-linux-os/
-https://cdn.crunchify.com/wp-content/uploads/2017/10/Linux-Systemd-Command-CheatSheet.png
-https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
-https://www.systutorials.com/change-systemd-boot-target-linux/
-https://documentation.suse.com/smart/linux/html/reference-managing-systemd-targets-systemctl/index.html
-https://www.computernetworkingnotes.com/linux-tutorials/systemd-target-units-explained.html
-https://unix.stackexchange.com/questions/126009/cause-a-script-to-execute-after-networking-has-started/126146#126146
+https://www.commandlinux.com/man-page/man5/systemd.service.5.html  
+https://linuxhandbook.com/systemd-list-services/  
+https://www.flatcar-linux.org/docs/latest/setup/systemd/  
+https://www.freedesktop.org/software/systemd/man/systemd.service.html  
+https://www.linode.com/docs/guides/start-service-at-boot/  
+https://crunchify.com/systemd-upstart-respawn-process-linux-os/  
+https://cdn.crunchify.com/wp-content/uploads/2017/10/Linux-Systemd-Command-CheatSheet.png  
+https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units  
+https://www.systutorials.com/change-systemd-boot-target-linux/  
+https://documentation.suse.com/smart/linux/html/reference-managing-systemd-targets-systemctl/index.html  
+https://www.computernetworkingnotes.com/linux-tutorials/systemd-target-units-explained.html  
+https://unix.stackexchange.com/questions/126009/cause-a-script-to-execute-after-networking-has-started/126146#126146  

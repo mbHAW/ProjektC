@@ -13,7 +13,7 @@ Das soll möglichst vollständig auf dem AWS-Server ablaufen können, der sich s
 
 Für eine bessere thematische Trennung und auch der Übersichtlichkeit wegen ist dieses Repository in drei Branches unterteilt.
 
-1. In dem aktuellen Branch "main" befinden sich die Quelldateien mitsamt dem Terraform-Ordner. Dieser wird benötigt um das Projekt auf dem Amazon-Server zu deployen.
-2. Der Branch "[doc](https://github.com/mbHAW/ProjektC/tree/doc)" enthält die ausführliche Dokumentation zu den einzelnen Unterthemen.
-3. Der Branch "[lokal](https://github.com/mbHAW/ProjektC/tree/lokal)" enthält Dateien und Anleitung für einen Codebuild-Testrun auf dem lokalen PC. Der kompabilität wegen wird dafür ein Docker-Container verwendet, den Amazon für diesen Zweck bereitstellt.
+1. In dem aktuellen Branch **main** befinden sich die Quelldateien mitsamt dem Terraform-Ordner. Dieser wird benötigt um das Projekt auf dem Amazon-Server zu deployen.
+2. Der Branch **[doc](https://github.com/mbHAW/ProjektC/tree/doc)** enthält die ausführliche Dokumentation zu den einzelnen Unterthemen.
+3. Der Branch **[lokal](https://github.com/mbHAW/ProjektC/tree/lokal)** enthält Dateien und Anleitung für einen Codebuild-Testrun auf dem lokalen PC. Der kompabilität wegen wird dafür ein Docker-Container verwendet, den Amazon für diesen Zweck bereitstellt.
 

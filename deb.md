@@ -28,7 +28,7 @@ Systemdateien und Programme, die mithilfe von `apt` installiert wurden, befinden
 
 Manuell installierte Programme aus nicht Debianpaketen und auch eigene selbst compilierte Binärdateien speichert man meist im Ordner `/opt/`, wobei es jedem freigestellt ist, wie man es machen möchte.
 
-### Die Dateistruktur des Debian-Ordners. Aus diesem wird später das .deb-Installationspaket generiert.
+### Beispiel für die Dateistruktur des Debian-Ordners. Aus diesem wird später das Installationspaket generiert.
 
 ![debianpackage structure](pics/debianpackage_structure.png)
 
@@ -39,7 +39,7 @@ Neben der Datei `control` befinden sich meist auch noch eine Reihe von Shellscri
 In diesem Beispiel sieht man die ausführbare Binärdatei `helloworld`, die sich im Ordner `usr/bin/` befindet. Die meisten Linux-Systeme enthalten das Programm `systemd`, das für die Steuerung von Hintergrundprogrammen ([Daemons](https://de.wikipedia.org/wiki/Daemon "Daemon")) und Bibliotheken zuständig ist. Die Datei `helloworld.service` (optional) enthält Anweisungen darüber, wie systemd das Programm ausführen soll.
 In dem Ordner `man1` befindet sich die "Manpage". Diese Textdatei ist noch einmal komprimiert worden um Speicherplatz zu reduzieren, obwohl das heutzutage eigentlich nicht mehr nötig ist.
 Mit dem Befehl `man helloworld` lässt sich diese im Terminal anzeigen. Allerdings ist in den letzten Jahren ein Downtrend in der Verwendung zu bemerken, da dieses Format oft zu lang und zu unübersichtlich ist und jedes Programm sowieso eine simple Hilfsausgabe enthält: `helloworld --help` oder `helloworld -h`  
-Häufiger sieht man derzeit anstatt von `man` auch die Verwendung von dem Tool `tldr` (too long to read). Dieses muss meist nachinstalliert werden, was aber kein Problem darstellt, da es normalerweise in den Paketquellen enthalten ist.  
+Häufiger sieht man derzeit anstatt von `man` auch die Verwendung von dem Tool `tldr` (too long didn't read). Dieses muss meist nachinstalliert werden, was aber kein Problem darstellt, da es normalerweise in den Paketquellen enthalten ist.  
 
 ```bash
 #!/bin/bash

@@ -1,4 +1,4 @@
-### Debian
+# Debian
 
 Eine Datei mit der Dateiendung `.deb` ist ein sog. Debianpaket, das man auf allen (auf Debian basierten) Linuxdistributionen findet. Es enthält die für das Ausführen eines Programms notwendigen Binary-Dateien und sonstigen Konfigurationsdateien. Das "Debian Package management tool" `dpkg` ist dazu da um die Debianpakete zu bearbeiten. Optionen sind z.B. `search, install, remove, purge, unpack`.
 `apt` ist das inzwischen gängigere Tool für den selben Zweck auf etwas höherem Niveau, benutzt aber intern auch das `dpkg`.  

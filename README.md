@@ -17,7 +17,7 @@ Für eine bessere thematische Trennung und auch der Übersichtlichkeit wegen ist
 2. Der Branch **[doc](https://github.com/mbHAW/ProjektC/tree/doc)** enthält die ausführliche Dokumentation zu den einzelnen Unterthemen.
 3. Der Branch **[lokal](https://github.com/mbHAW/ProjektC/tree/lokal)** enthält Dateien und Anleitung für einen Codebuild-Testrun auf dem lokalen PC. Der kompabilität wegen wird dafür ein Docker-Container verwendet, den Amazon für diesen Zweck bereitstellt.
 
-Als Testprogramm wird hier ein kleiner Go-Server verwendet.
+Als Testprogramm wird hier ein kleiner Go-Server[^1] verwendet.
 ```go
 package main
 
@@ -53,7 +53,7 @@ Um den Aktivitätsstatus vom Server einzusehen, eignet sich der Kommandozeilenbe
 ```bash
 systemctl status helloapp.service
 ```
-Eventuell muss man den Service[^1] erst noch mit `systemctl start helloapp.service` aktivieren. Das kann von Betriebssystem zu Betriebssystem variieren.
+Eventuell muss man den Service[^2] erst noch mit `systemctl start helloapp.service` aktivieren. Das kann von Betriebssystem zu Betriebssystem variieren.
 Natürlich könnte man das Executable auch direkt mit dem Befehl `helloapp` starten, da es in dem Dateipfad `/usr/bin/` liegt und daher von der PATH-Variable des Betriebssystems erkannt wird.
 
 Um den Server aufzurufen, gibt man einfach `localhost:8080/ausgedachter Benutzername` in die URL-Zeile des eigenen Webbrowsers ein. Im Browserfenster sollte nun `Hello ausgedachter Benutzername` erscheinen.
@@ -63,4 +63,5 @@ Um den Server wieder von dem Betriebssystem zu löschen, verwende einfach folgen
 sudo apt purge helloapp
 ```
 
-[^1]: https://github.com/mbHAW/ProjektC/blob/doc/systemd.md
+[^1]: https://yourbasic.org/golang/http-server-example/
+[^2]: https://github.com/mbHAW/ProjektC/blob/doc/systemd.md

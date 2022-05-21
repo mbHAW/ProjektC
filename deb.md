@@ -1,3 +1,5 @@
+### Debian
+
 Eine Datei mit der Dateiendung `.deb` ist ein sog. Debianpaket, das man auf allen (auf Debian basierten) Linuxdistributionen findet. Es enthält die für das Ausführen eines Programms notwendigen Binary-Dateien und sonstigen Konfigurationsdateien. Das "Debian Package management tool" `dpkg` ist dazu da um die Debianpakete zu bearbeiten. Optionen sind z.B. `search, install, remove, purge, unpack`.
 `apt` ist das inzwischen gängigere Tool für den selben Zweck auf etwas höherem Niveau, benutzt aber intern auch das `dpkg`.  
 
@@ -24,15 +26,14 @@ Beispiel mit Angabe des Speicherpfades: `/home/user/Downloads/binary` oder `cd ~
 Man könnte natürlich auch den Download-Ordner der Umgebungsvariable manuell hinzufügen(`PATH="$HOME/Downloads:$PATH"`), allerdings ist das meist nicht zu empfehlen.
 Systemdateien und Programme, die mithilfe von `apt` installiert wurden, befinden sich für Gewöhnlich alle im selben Ordner `/usr/bin/`.  
 
-(Manuell installierte Programme aus nicht Debianpaketen und auch eigene selbst compilierte Binärdateien speichert man meist im Ordner `/opt/`, wobei es jedem freigestellt ist, wie man es machen möchte.)  
-(Ein Debianpaket ist dabei eigentlich nichts weiter, als eine Standard Archivdatei und sogar mit dem `.ar` Kommandozeilenwerkzeug einsehbar und damit vielleicht vergleichbar mit der häufiger bekannten ZIP-Datei.)  
+Manuell installierte Programme aus nicht Debianpaketen und auch eigene selbst compilierte Binärdateien speichert man meist im Ordner `/opt/`, wobei es jedem freigestellt ist, wie man es machen möchte.
 
-https://github.com/Tornado3P9/Konsolentools/blob/master/Custom_Debian_Package/make_file_structure.sh  
+### Die Dateistruktur des Debian-Ordners. Aus diesem wird später das .deb-Installationspaket generiert.
 
 ![debianpackage structure](pics/debianpackage_structure.png)
 
 Das kleinste Debianpaket enthält lediglich den Ordner `DEBIAN` mit der Konfigurationsdatei `control`, in dem die Informationen stehen, die angezeigt werden,
-wenn man das Paket z.B. mit Befehl `apt show debianpaket.deb` aufruft. Eine Beispielausgabe würde wohl Entwicklernamen, Lizenzen, CPU-Architektur oder auch die Programmversion enthalten.
+wenn man das Paket z.B. mit dem Befehl `apt show debianpaket.deb` aufruft. Eine Beispielausgabe würde wohl Entwicklernamen, Lizenzen, CPU-Architektur oder auch die Programmversion enthalten.
 Neben der Datei `control` befinden sich meist auch noch eine Reihe von Shellscript-Dateien, die die Installation und auch die Deinstallation von dem Programm und dessen Konfiguration regeln.  
 
 In diesem Beispiel sieht man die ausführbare Binärdatei `helloworld`, die sich im Ordner `usr/bin/` befindet. Die meisten Linux-Systeme enthalten das Programm `systemd`, das für die Steuerung von Hintergrundprogrammen ([Daemons](https://de.wikipedia.org/wiki/Daemon "Daemon")) und Bibliotheken zuständig ist. Die Datei `helloworld.service` (optional) enthält Anweisungen darüber, wie systemd das Programm ausführen soll.
@@ -258,6 +259,7 @@ dpkg-deb --build mydebianpackage/ ${FINAL_PROGRAM}
 
 ```
 
+Übrigens: Ein Debianpaket ist eigentlich nichts weiter, als eine Standard Archivdatei und sogar mit dem `.ar` Kommandozeilenwerkzeug einsehbar und damit vielleicht vergleichbar mit der häufiger bekannten ZIP-Datei.  
 Für weitere Tipps und Hinweise kann man das Analysetool [**lintian**](https://manpages.debian.org/stretch/lintian/lintian.1.en.html) benutzen.
 ```bash
 lintian helloworld-1.0-all.deb

@@ -110,7 +110,7 @@ cache:
 ```
 
 
-Rust:
+Rust: Beispiel für automatische Paketierung mit FPM für ein .deb build aus einem .rs file.
 ```yaml
 version: 0.2
 
@@ -152,7 +152,7 @@ artifacts:
   discard-paths: yes
 ```
 
-Rust:
+Rust: Beispiel für automatische Paketierung mit FPM für ein .deb/.rpm build aus einem .rs file.
 ```yaml
 version: 0.2
 
@@ -189,7 +189,7 @@ artifacts:
         discard-paths: yes
 ```
 
-Go:
+Go: Beispiel für automatische Paketierung mit FPM für ein .deb/.rpm build aus einem .go file.
 ```yaml
 version: 0.2
 
@@ -220,17 +220,9 @@ phases:
 artifacts:
   files:
     - helloapp
-    - buildspec.yml
+    - ./helloapp-latest-amd64.rpm
+    - ./helloapp-latest-amd64.deb
   discard-paths: yes
-  secondary-artifacts:
-      rpm:
-        files:
-          - ./helloapp-latest-amd64.rpm
-        discard-paths: yes
-      deb:
-        files:
-          - ./helloapp-latest-amd64.deb
-        discard-paths: yes
 ```
 
 C: Beispiel für manuelle Paketierung ohne FPM für ein .rpm build aus einem .c file.[^3]
@@ -283,8 +275,9 @@ artifacts:
 ```
 [Change Artifact Names](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-buildspec-artifact-naming.html) - docs.aws.amazon.com  
 [Change Artifact Names - first enable the option on AWS](https://stackoverflow.com/questions/65589025/how-to-store-codebuild-output-artifact-in-s3-bucket-folder-with-the-folder-name) - stackoverflow.com  
-Dass der Artifact-Name verändert werden kann muss erst noch auf AWS erlaubt werden. Aber auch das geht mit Terraform. Hier ein Beispiel aus der Datei codebuild.tf:  
-```json
+Dass der Artifact-Name verändert werden kann muss erst noch auf AWS erlaubt werden. Aber auch das geht mit Terraform.  
+Hier ein Beispiel aus der Datei codebuild.tf:
+```terraform
 resource "aws_codebuild_project" "helloapp" {
 	
   artifacts {

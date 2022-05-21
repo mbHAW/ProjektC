@@ -49,8 +49,11 @@ sudo yum install ./helloapp-latest-amd64.rpm
 sudo zypper install ./helloapp-latest-amd64.rpm
 ```
 
-Um den Aktivitätsstatus vom Server einzusehen, eignet sich der Kommandozeilenbefehl `systemctl status helloapp.service`.  
-Eventuell muss man den Service[^1] erst noch mit `systemctl start helloapp.service` aktivieren. Das kann von Betriebssystem zu Betriebssystem variieren.  
+Um den Aktivitätsstatus vom Server einzusehen, eignet sich der Kommandozeilenbefehl
+```bash
+systemctl status helloapp.service
+```
+Eventuell muss man den Service[^1] erst noch mit `systemctl start helloapp.service` aktivieren. Das kann von Betriebssystem zu Betriebssystem variieren.
 Natürlich könnte man das Executable auch direkt mit dem Befehl `helloapp` starten, da es in dem Dateipfad `/usr/bin/` liegt und daher von der PATH-Variable des Betriebssystems erkannt wird.
 
 Um den Server aufzurufen, gibt man einfach `localhost:8080/ausgedachter Benutzername` in die URL-Zeile des eigenen Webbrowsers ein. Im Browserfenster sollte nun `Hello ausgedachter Benutzername` erscheinen.

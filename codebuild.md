@@ -91,11 +91,11 @@ artifacts:
 ___
 
 ## Der Ordner "terraform-build" mit den [Terraform](https://github.com/mbHAW/ProjektC/blob/doc/terraform.md)-Dateien ist für das Deployment auf dem Remote-Server nötig. Für den lokalen Test mit Docker braucht man diesen allerdings nicht!
-- [codebuild.tf](#codebuild.tf)
-- [iam.tf](#iam.tf)
-- [main.tf](#main.tf)
-- [s3.tf](#s3.tf)
-- [vars.tf](#vars.tf)
+- [codebuild.tf](#codebuildtf)
+- [iam.tf](#iamtf)
+- [main.tf](#maintf)
+- [s3.tf](#s3tf)
+- [vars.tf](#varstf)
 
 ### codebuild.tf
 [CodeBuild-Type-ProjectArtifacts-packaging - docs.aws.amazon.com](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ProjectArtifacts.html#CodeBuild-Type-ProjectArtifacts-packaging) [Can AWS CodeBuild output unzipped artifacts? - stackoverflow.com](https://stackoverflow.com/questions/57336854/can-aws-codebuild-output-unzipped-artifacts)  

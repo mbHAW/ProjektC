@@ -1,7 +1,5 @@
-- [[snap]]
-- [[deb]]
-- [[rpm]]
-- [[Projekt C - Scripts]]
+- [deb](https://github.com/mbHAW/ProjektC/blob/doc/deb.md)
+- [rpm](https://github.com/mbHAW/ProjektC/blob/doc/fpm.md)
 
 Das Programm "FPM" reduziert den Arbeitsaufwand enorm, da man sich nur noch auf den Inhalt konzentrieren muss und nicht auf Unterschiede und Eigenheiten zwischen Betriebssystemen.
 FPM wird inzwischen von vielen Entwicklerstudios verwendet. Z.B. von InfluxData für die Kompilierung von [Telegraf](https://github.com/influxdata/telegraf/blob/577c0462b8a0c0f98e822672091d9cf6916427d9/Makefile) in unterschiedliche Formate gleichzeitig.

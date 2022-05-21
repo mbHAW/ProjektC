@@ -110,7 +110,7 @@ ___
 In diesem Fall (packaging = "NONE") und wenn mans tatsächlich auf AWS laufen lässt, dann braucht man auch keine secondary-artifacts mehr. Einfach alles zusammen packen. Es wird ja jetzt nicht mehr gezippt und liegt einfach alles nebeneinander.  
 [How to set 'Source version' for AWS CodeBuild project in Terraform](https://stackoverflow.com/questions/58800912/how-to-set-source-version-for-aws-codebuild-project-in-terraform) - stackoverflow.com [Source version sample with AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html) - docs.aws.amazon.com
 
-```json
+```terraform
 resource "aws_codebuild_project" "helloapp" {
   name         = "helloapp"
   service_role = aws_iam_role.builder_role.arn
@@ -153,7 +153,7 @@ Die Angabe `source_version = "main"` bezieht sich auf den Github-Branch. Man kö
 
 
 ### iam.tf[^2]
-```json
+```terraform
 resource "aws_iam_role" "builder_role" {
   name = "helloapp-builder"
 
@@ -216,7 +216,7 @@ resource "aws_iam_role_policy" "builder_policy" {
 ```
 
 Alternativ sollte eigentlich auch reichen: (dann braucht man auch die Variable *"account_id"* nicht mehr)
-```json
+```terraform
 resource "aws_iam_role" "builder_role" {
   name = "helloapp-builder"
 
@@ -270,7 +270,7 @@ resource "aws_iam_role_policy" "builder_policy" {
 ```
 
 ### main.tf
-```json
+```terraform
 terraform {
   required_providers {
     aws = {
@@ -296,7 +296,7 @@ provider "aws" {
 ```
 
 ### s3.tf
-```json
+```terraform
 resource "aws_s3_bucket" "artifact_bucket" {
   bucket = "projektc-${var.environment}-helloapp-builds"
   acl    = "private"
@@ -325,7 +325,7 @@ resource "aws_s3_bucket_public_access_block" "artifact_bucket" {
 ```
 
 ### vars.tf
-```json
+```terraform
 variable "environment" {
   type    = string
   default = "dev"
@@ -373,22 +373,22 @@ ProjektC/
 
 #### Voraussetzungen:
 Gehe zur Webseite https://console.aws.amazon.com/  
-![[menu.png]]
+![menu.png](pics/menu.png)
 
 **Auf dem AWS-Server müssen ein paar Voreinstellungen getroffen worden sein:**  
 - Der AWS-Account muss erstellt worden sein und auch ein *"IAM Benutzer"* mit vorzugsweise beschränkten Rechten angelegt worden sein. Gib dafür *"iam"* in die AWS-Suchzeile ein und wähle "Identity and Access Management (IAM)" aus. Unter dem Reiter *"Users"* kann man einen neuen Benutzer anlegen. Danach logt man sich mit dem neuen Benutzer (oder mit dem alten Administrator-Benutzer) auf der Webkonsole erneut ein und gelangt dann über einen Mausklick auf den Benutzernamen (rechts oben) zu dem Menüpunkt *"Security credentials"*. Dort einmal draufgeklickt, öffnet sich die Seite *"My security credentials"*, auf der sich neue *"access keys"* für die Verwendung von AWS-CLI und Terraform erstellen lassen.
-    ![[accesskey.png]]
-Das Profil wird anschließend auf dem PC des Benutzers mit Hilfe des [[Projekt C - awscli|AWS-Clienten]] angelegt, damit der Benutzer diese Daten nicht jedes Mal erneut angeben muss.
+    ![accesskey.png](pics/accesskey.png)
+Das Profil wird anschließend auf dem PC des Benutzers mit Hilfe des [awscli.md|AWS-Clienten] angelegt, damit der Benutzer diese Daten nicht jedes Mal erneut angeben muss.
 Terraform benutzt dann das angelegte Profil um sich auf AWS zu verifizieren. (Siehe main.tf)
 
 - Ein S3-Bucket mit dem Namen *"projektc-dev-terraform-state"* für das State-File *"terraform.tfstate"* muss erstellt werden. (Siehe main.tf)
-    ![[buckets.png]]
+    ![buckets.png](pics/buckets.png)
 
 - Eine DynamoDB-Tabelle *"terraform-state-lock"* mit dem Partition key *"LockID"* sollte vorher erstellt werden. (Siehe main.tf)
-    ![[dynamoDB.png]]
+    ![dynamoDB.png](pics/dynamoDB.png)
 
 - Damit CodeBuild auf die Projektdateien auf dem Github-Account zugreifen kann muss zuerst ein [personal-access-token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) auf Github erstellt werden. Um CodeBuild das Token mitzuteilen, gib in die AWS-Suchzeile "ssm" ein und wähle den Service "Systems Manager" aus. Unter dem Reiter "Parameter Store" lässt sich nun der Github-Token eingeben.
-    ![[github_access_token.png]]
+    ![github_access_token.png](github_access_token.png)
 
 
 #### Erste Projektinitialisierung:
@@ -407,7 +407,7 @@ Wurde kein Remote-S3-Container für die Speicherung der Datei *"terraform.tfstat
 Dabei ist zu beachten, dass man das State-File möglichst niemals auf Github mitveröffentlicht, da diese Datei sensible Daten enthält. Am einsfachsten ist es da, eine *".gitignore"*-Datei im Projektordner anzulegen, die die Zeile `.terraform` enthält (s.o.). Damit wird dieser Ordner von Git ignoriert.
 
 Das Projekt wurde jetzt automatisch auf dem AWS-Server erstellt und CodeBuild sollte sich ganz einfach über einen Klick auf den *"Start build"*-Button in der Webansicht starten lassen. Das kompilierte Programm liegt danach in dem dafür eigens generierten S3-Bucket. CodeBuild holt sich ab jetzt bei jedem Build immer den jeweils aktuellsten Stand aus dem Github-Repository.
-![[codebuild.png]]
+![codebuild.png](codebuild.png)
 
 ## Anlegen von Workspaces[^3] (optional)
 Workspaces sind teilweise vergleichbar mit der Idee von Branches auf Github. Durch die Nutzung von einem Workspace "dev" und einem Workspace "prod" lassen sich die Arbeitsumgebungen "Entwicklung" und "Produktion/Release" in unterschiedliche Accounts trennen, allerdings mit dem Vorteil, dass man nicht für jeden Account einen eigenen Projektordner anlegen muss. Die Dateien bleiben ja die Selben. Nur der Destinationsort auf dem Server ist ein anderer. (Der Workspace "default" ist übrigens immer da und lässt sich auch nicht löschen.)

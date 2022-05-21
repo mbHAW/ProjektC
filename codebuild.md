@@ -1,4 +1,8 @@
 # AWS CodeBuild[^1]
+- [fpm](https://github.com/mbHAW/ProjektC/blob/doc/fpm.md)
+- [awscli](https://github.com/mbHAW/ProjektC/blob/doc/awscli.md)
+- [terraform](https://github.com/mbHAW/ProjektC/blob/doc/terraform.md)
+- [buildspec.yml](https://github.com/mbHAW/ProjektC/blob/doc/buildspec.md)
 
 ### About:
 - [AWS CodeBuild Tutorial](https://youtu.be/qGgNyOkZEb0) Stephane Maarek - Youtube

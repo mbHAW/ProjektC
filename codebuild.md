@@ -102,9 +102,11 @@ ___
 - [vars.tf](#varstf)
 
 ### codebuild.tf
-[CodeBuild-Type-ProjectArtifacts-packaging - docs.aws.amazon.com](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ProjectArtifacts.html#CodeBuild-Type-ProjectArtifacts-packaging) [Can AWS CodeBuild output unzipped artifacts? - stackoverflow.com](https://stackoverflow.com/questions/57336854/can-aws-codebuild-output-unzipped-artifacts)  
+[CodeBuild-Type-ProjectArtifacts-packaging](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ProjectArtifacts.html#CodeBuild-Type-ProjectArtifacts-packaging) - docs.aws.amazon.com  
+[Can AWS CodeBuild output unzipped artifacts?](https://stackoverflow.com/questions/57336854/can-aws-codebuild-output-unzipped-artifacts) - stackoverflow.com  
 In diesem Fall (packaging = "NONE") und wenn mans tatsächlich auf AWS laufen lässt, dann braucht man auch keine secondary-artifacts mehr. Einfach alles zusammen packen. Es wird ja jetzt nicht mehr gezippt und liegt einfach alles nebeneinander.  
-[How to set 'Source version' for AWS CodeBuild project in Terraform](https://stackoverflow.com/questions/58800912/how-to-set-source-version-for-aws-codebuild-project-in-terraform) - stackoverflow.com [Source version sample with AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html) - docs.aws.amazon.com
+[How to set 'Source version' for AWS CodeBuild project in Terraform](https://stackoverflow.com/questions/58800912/how-to-set-source-version-for-aws-codebuild-project-in-terraform) - stackoverflow.com  
+[Source version sample with AWS CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html) - docs.aws.amazon.com
 
 ```terraform
 resource "aws_codebuild_project" "helloapp" {
@@ -361,7 +363,7 @@ ProjektC/
     ├── main.tf
     ├── s3.tf
     ├── vars.tf
-	└── .gitignore
+    └── .gitignore
 ```
 
 

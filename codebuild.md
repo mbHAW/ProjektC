@@ -90,7 +90,7 @@ artifacts:
 
 ___
 
-## Der Ordner "terraform-build" mit den [[Terraform]]-Dateien ist für das Deployment auf dem Remote-Server nötig. Für den lokalen Test mit Docker braucht man diesen allerdings nicht!
+## Der Ordner "terraform-build" mit den [Terraform](https://github.com/mbHAW/ProjektC/blob/doc/terraform.md)-Dateien ist für das Deployment auf dem Remote-Server nötig. Für den lokalen Test mit Docker braucht man diesen allerdings nicht!
 - codebuild.tf
 - iam.tf
 - main.tf

@@ -380,7 +380,7 @@ Terraform benutzt dann das angelegte Profil um sich auf AWS zu verifizieren. (Si
     ![dynamoDB.png](pics/dynamoDB.png)
 
 - Damit CodeBuild auf die Projektdateien auf dem Github-Account zugreifen kann muss zuerst ein [personal-access-token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) auf Github erstellt werden. Um CodeBuild das Token mitzuteilen, gib in die AWS-Suchzeile "ssm" ein und wähle den Service "Systems Manager" aus. Unter dem Reiter "Parameter Store" lässt sich nun der Github-Token eingeben.
-    ![github_access_token.png](github_access_token.png)
+    ![github_access_token.png](pics/github_access_token.png)
 
 
 #### Erste Projektinitialisierung:

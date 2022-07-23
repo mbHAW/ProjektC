@@ -1,7 +1,10 @@
-# Service Management using systemd and systemctl
+# Service Management using Systemd
 - [systemd with multiple execstart](https://github.com/mbHAW/ProjektC/blob/doc/systemd%20with%20multiple%20execstart.md)
+- [systemd custom service](https://github.com/mbHAW/ProjektC/blob/doc/systemd%20custom%20service.md)
 
-VIEW unit INFORMATION (Units can be written both like this `unit_name.service` or like this `unit_name`. You can usually find them at `/etc/systemd/system/` and `/usr/lib/systemd/system/`)
+**VIEW systemd/unit INFORMATION**  
+Units can be written both like this `unit_name.service` or like this `unit_name`.  
+You can usually find them at `/etc/systemd/system/` and `/usr/lib/systemd/system/`.
 ```bash
 # Show all running services:
 systemctl status
@@ -34,14 +37,15 @@ systemctl edit unit --full
 # showing info about the boot process
 systemd-analyze
 systemd-analyze blame
-```
 
-VIEW systemd INFORMATION
-```bash
+# Show units required and wanted by the specified units. This recursively lists units following the Requires=, Requisite=, ConsistsOf=, Wants=, BindsTo= dependencies.
+# If no units are specified, default.target is implied.
 systemctl list-dependencies
 
+# List socket units currently in memory, ordered by listening address
 systemctl list-sockets
 
+# List jobs that are in progress
 systemctl list-jobs
 
 # List Service Unit Files
@@ -63,15 +67,16 @@ systemctl list-units --type=target --all
 systemctl get-default
 ```
 
+Managing sleep behavior in Ubuntu
 ```bash
-    # Confirm Sleep Status with systemd
-    systemctl status sleep.target
+# Confirm Sleep Status with systemd
+systemctl status sleep.target
 
-    # Disable Sleep in Ubuntu with systemd
-    sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+# Disable Sleep in Ubuntu with systemd
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
-    # (re) Enabling Sleep in Ubuntu with systemctl
-    sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
+# (re) Enabling Sleep in Ubuntu with systemctl
+sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
 ```
 
 

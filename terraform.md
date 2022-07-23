@@ -1,5 +1,6 @@
 # Terraform[^1]
 
+Hier eine Liste gängigster Terminalbefehle:
 ```bash
 terraform init         # Initialize Project...get terraform.tfstate file from remote server if being used
 
@@ -27,17 +28,24 @@ terraform apply --auto-approve  # Apply the new changes in your project without 
 
 
 ## Using Shell script in Terraform "user_data"
+
+Die Option "user_data" eröffnet die Möglichkeit, zusammen mit der AWS-Instance-Erstellung ein ShellScript ausführen lassen, das alle nötigen Abhängigkeiten nachinstalliert und sonstige Einstellungen vornimmt.
+Dies erlaubt Systemadministratoren, die bereits Erfahrung mit einer Linux-Konsole haben, Teile des Setups in gewohnten Umgebung zu erstellen, bzw. die letzte Feinjustierung vorzunehmen.
+Wenn mit Terraform nur noch eine ganz simple Standard-Instance erstellen braucht und man alle weiteren Optionen mit einem Shellscript bewerkstellen kann, so vereinfacht es dem Terraform-Neuling etwas den Einstieg.  
+
+Beispiele:
 [Terraform AWS EC2 user_data example](https://www.middlewareinventory.com/blog/terraform-aws-ec2-user_data-example/) - middlewareinventory.com  
 [Terraform Course demo-10](https://github.com/wardviaene/terraform-course/tree/master/demo-10) - github.com  
 [How to use terraform with user_data and cloudinit() on AWS](https://linuxinuse.com/devopsblog/use-terraform-modules/) - linuxinuse.com  
 
-Damit kann ich bei der AWS-Instance-Erstellung ein ShellScript ausführen lassen, dass alle nötigen Dependencies nachinstalliert und sonstige Einstellungen vornimmt.
-Das vereinfacht dann vielleicht generell das Setup, wenn ich mit Terraform lediglich eine ganz simple Standard-Instance erstelle und den sonstigen Kram, wie gewohnt, mit Shellscript.
 
 ## Terraform s3 Bucket
-um zu wissen, was da reingehört, wenn man ein aws s3 bucket zum storen von dem state file benutzen will, dann einfach direkt bei terraform nachschauen:  
+Alle Terraform-Optionen auswendig zu kennen ist geradezu unmöglich. Nicht nur deswegen, weil sich die Optionen mit der Zeit verändern können.  
+Wenn man ein AWS S3 Bucket für die Aufbewahrung von "state"-Files benutzen will, dann ist der schnellste Weg Folgender:  
 [Terraform Settings -> Backends -> Available Backends](https://www.terraform.io/language/settings/backends/s3)  
-Die haben auch gleich die Infos für all die anderen service provider.  
+Dort finden sich auch die Infos für eine Reihe anderer Service-Provider.  
+
+
 
 [^1]: [Beginners Tutorial to Terraform with AWS - Wahl Network](https://youtu.be/XxTcw7UTues) - Youtube  
 [Terraform AWS Example – Create EC2 instance with Terraform](https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/) - middlewareinventory.com  

@@ -1,59 +1,66 @@
 # Service Management using systemd and systemctl
 - [systemd with multiple execstart](https://github.com/mbHAW/ProjektC/blob/doc/systemd%20with%20multiple%20execstart.md)
 
+VIEW unit INFORMATION (Units can be written both like this `unit_name.service` or like this `unit_name`. You can usually find them at `/etc/systemd/system/` and `/usr/lib/systemd/system/`)
 ```bash
-    # showing info about the boot process
-    systemd-analyze
-    systemd-analyze blame
+# Show all running services:
+systemctl status
 
-    # listing all active units systemd knows about
-    systemctl list-units
-    systemctl list-units | grep ssh
+# List failed units:
+systemctl --failed
 
-    # listing Service Unit Files
-    systemctl list-unit-files --type=service
+# Start/Stop/Restart/Reload a service:
+systemctl start|stop|restart|reload unit
+systemctl reload-or-try-restart unit
 
-    # listing all the loaded services including the inactive ones '--all'
-    systemctl list-units --all --type=service
+# Show the status of a unit:
+systemctl status unit
 
-    # checking the status of a service
-    sudo systemctl status nginx.service
+# Enable/Disable a unit to be started on bootup:
+systemctl enable|disable unit
 
-    # stopping a service
-    sudo systemctl stop nginx
+# Mask/Unmask a unit to prevent enablement and manual activation:
+systemctl mask|unmask unit
 
-    # starting a service
-    sudo systemctl start nginx
+# Reload systemd, scanning for new or changed units:
+systemctl daemon-reload
 
-    # restarting a service
-    sudo systemctl restart nginx
+# Check for specific status:
+systemctl is-active|is-enabled|is-failed unit
 
-    # reloading the configuration of a service
-    sudo systemctl reload nginx
-    sudo systemctl reload-or-restart nginx
+# Edit a service
+systemctl edit unit --full
 
-    # enabling to start at boot time
-    sudo systemctl enable nginx
+# showing info about the boot process
+systemd-analyze
+systemd-analyze blame
+```
 
-    # disabling at boot time
-    sudo systemctl disable nginx
+VIEW systemd INFORMATION
+```bash
+systemctl list-dependencies
 
-    # checking for specific status
-    sudo systemctl is-active nginx
-    sudo systemctl is-enabled nginx
-    sudo systemctl is-failed nginx
+systemctl list-sockets
 
-    # masking a service (stopping and disabling it)
-    sudo systemctl mask nginx
+systemctl list-jobs
 
-    # unmasking a service
-    sudo systemctl unmask nginx
+# List Service Unit Files
+systemctl list-unit-files --type=service
 
-    # edit a service
-    sudo systemctl edit nginx --full
+# List all active units systemd knows about
+systemctl list-units
 
-    # view the list of all available target-units with their status and a brief description
-    systemctl list-units --type=target --all
+# List all active units and filter for 'ssh'
+systemctl list-units | grep ssh
+
+# List all the loaded services including the inactive ones '--all'
+systemctl list-units --all --type=service
+
+# View the list of all available target-units with their status and a brief description
+systemctl list-units --type=target --all
+
+# Display the default target file
+systemctl get-default
 ```
 
 ```bash
@@ -67,83 +74,9 @@
     sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
 ```
 
-```bash
-    # Creating Custom Systemd Service
-    # https://www.howtogeek.com/687970/how-to-run-a-linux-program-at-startup-with-systemd/
-    # https://www.devdungeon.com/content/creating-systemd-service-files
-    # https://youtu.be/fYQBvjYQ63U
-
-    # We need to create a unit file for our new service, but it is prudent to make sure none of the existing unit files have the name we want to give our new service.
-    sudo systemctl list-unit-files --type=service
-
-    # Create service file
-    sudo nano /etc/systemd/system/program_name.service
-
-    ### An example might look like this:
-    [Unit]
-    Description=Crunchify Java Process Restart Upstart Script
-    After=auditd.service systemd-user-sessions.service time-sync.target
- 
-    [Service]
-    EnvironmentFile=-/etc/default/crunchify
-    User=root
-    TimeoutStartSec=0
-    Type=simple
-    KillMode=process
-    WorkingDirectory=/tmp/crunchify
-    ExecStart=/opt/java/jdk-9/bin/java -cp /tmp/crunchify CrunchifyAlwaysRunningProgram
-    Restart=always
-    RestartSec=2
-    LimitNOFILE=5555
- 
-    [Install]
-    WantedBy=multi-user.target
-    
-    ### Or just like this.
-    [Service]
-    ExecStart=/usr/local/bin/program.sh
-
-    # Tipp: "ExecStart=infinite-loop-script.sh"
-    # using a script to start other programs gives you more room for long execution lines or multiple line instructions. Stopping the script will usually also stop the programs.
-    # check the process tree with the "pstree -c" command.
-
-    ### Further Options (https://www.commandlinux.com/man-page/man5/systemd.service.5.html)
-    # Description: This is a text description of your service.
-    # Wants:       Our service wants — but doesn’t require — the network to be up before our service is started.
-    # After:       A list of unit names that should be started after this service has been successfully started, if they’re not already running.
-    # Type:        Simple. systemd will consider this service started as soon as the process specified by ExecStart has been forked.
-    # ExecStart:   The path to the process that should be started.
-    # Restart:     When and if the service should be restarted. no, on-success, on-failure, on-abnormal, on-watchdog, on-abort, or always
-    # RestartSec:  How long to wait before attempting to restart the service. This value is in seconds.
-    # KillMode:    Defines how systemd should kill the process if we ask systemctl to stop the service. “process” causes systemd to use the SIGTERM signal on the main process only.
-    #              If our service was a non-trivial program instead of a simple script, we would set this to “mixed” to ensure that any spawned processes were also terminated.
-    # WantedBy:    We have this set to “multi-user.target”, which means the service should be started as long as the system is in a state where multiple users can log in,
-    #              whether or not a graphical user interface is available.
-
-    # Give the owner read and write permissions, and read permissions to the group. Others will have no permissions.
-    sudo chmod 640 /etc/systemd/system/program_name.service
-
-    # Check status
-    systemctl status program_name.service
-
-    # However (using telegraf as an example), even if your service is running, it does not guarantee that it is correctly sending data to InfluxDB.
-    # To verify it, check your journal logs.
-    sudo journalctl -f -u telegraf.service
-
-    # When you add a new unit file or edit an existing one, you should tell systemd to reload the unit file definitions.
-    sudo systemctl daemon-reload
-
-    # If you want a service to be launched at startup you must enable it
-    sudo systemctl enable program_name
-
-    # Start the service
-    sudo systemctl start program_name
-
-    # (Optional) After manually starting the service or after rebooting the computer, we can verify that our service is running correctly
-    sudo systemctl status program_name.service
-```
 
 ## Links
+https://www.freedesktop.org/software/systemd/man/systemctl.html.  
 https://www.commandlinux.com/man-page/man5/systemd.service.5.html  
 https://linuxhandbook.com/systemd-list-services/  
 https://www.flatcar-linux.org/docs/latest/setup/systemd/  

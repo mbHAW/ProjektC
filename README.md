@@ -2,42 +2,50 @@
 
 
 #### 1. Build-Image installieren
-1. Installing Docker on your local machine
+1. Installieren von Docker auf dem lokalen Computer
 	```bash
 	sudo apt install docker.io
 	```
-2. Downloading the Amazon Linux 2 Docker Image
+2. Herunterladen des Amazon Linux 2 Docker-Images
 	```bash
 	docker pull public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0
 	```
-1. Downloading the agent
+3. Herunterladen des Agenten
 	```bash
 	docker pull public.ecr.aws/codebuild/local-builds:latest
 	```
 
 #### 2. Github-Projektordner holen
-
+1. Git installieren
+	```bash
+	sudo apt install git
+	```
+2. Projektordner herunterladen
+	```bash
+	git clone https://github.com/mbHAW/ProjektC.git
+	```
+3. Zum branch 'lokal' wechseln
 ```bash
-sudo apt install git    # Git installieren
-git clone https://github.com/mbHAW/ProjektC.git     # Projektordner herunterladen
-git checkout lokal      # Zum branch 'lokal' wechseln
-cd ..                   # Aus dem Projektordner zum übergeordneten Ordner wechseln
+git checkout lokal
 ```
+4. Aus dem Projektquellordner "ProjektC" zum übergeordneten Ordner wechseln
+	```
+	cd ..
+	```
 
 #### 3. CodeBuild-Agent ausführen
-1. (Sofern nocht nicht geschehen) In das Verzeichnis wechseln, das den Projektquellordner "ProjektC" enthält
-2. Download the [codebuild_build.sh](https://github.com/aws/aws-codebuild-docker-images/blob/master/local_builds/codebuild_build.sh) script:
+1. Laden Sie das [codebuild_build.sh](https://github.com/aws/aws-codebuild-docker-images/blob/master/local_builds/codebuild_build.sh) Skript herunter:
 	```bash
 	wget https://raw.githubusercontent.com/aws/aws-codebuild-docker-images/master/local_builds/codebuild_build.sh
 	chmod +x codebuild_build.sh
 	```
-3. Run the `codebuild_build.sh` script and specify your container image and the output directory and the source directory
+2. Führen Sie das Skript `codebuild_build.sh` aus und geben Sie das Container-Image sowie das Ausgabeverzeichnis und das Quellverzeichnis an.
 	```bash
 	#./codebuild_build.sh -i <container-image> -a <output directory> -s <source directory>
 	# Example:
 	./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a /tmp/buildresult/ -s ProjektC
 	```
-4. If all goes well you’ll get an exit code of 0 at the end
+3. Wenn alles gut geht, erhalten Sie am Ende einen Exit-Code von 0
 	```bash
 	echo $?
 	```

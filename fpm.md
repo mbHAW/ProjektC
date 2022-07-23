@@ -115,7 +115,7 @@ if ! id helloapp &>/dev/null; then
 fi
 ```
 
-#### [[systemd|helloapp.service]]
+#### [helloapp.service](https://github.com/mbHAW/ProjektC/blob/doc/systemd.md)
 ```bash
 [Unit]
 Description=Example Description

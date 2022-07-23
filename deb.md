@@ -15,7 +15,7 @@ Einige wichtige Verzeichnisse in `/` sind:
 - **/bin** → Der Ordner, in dem alle Binärdateien liegen, wie z.B. ls oder firefox
 - **/boot** → Hier liegen die Dateien des Boot-Loaders
 - **/etc** → Hier liegen die meisten Konfigurationsdateien
-- **/lib** → Libraries
+- **/lib** → System-Libraries
 - **/opt** → Optionale Applikationen und Softwarepakete
 - **/home** → Benutzerordner mit allen Dokumenten, Bildern, Videos, ...
 
@@ -259,7 +259,7 @@ dpkg-deb --build mydebianpackage/ ${FINAL_PROGRAM}
 
 ```
 
-Übrigens: Ein Debianpaket ist eigentlich nichts weiter, als eine Standard Archivdatei und sogar mit dem `.ar` Kommandozeilenwerkzeug einsehbar und damit vielleicht vergleichbar mit der häufiger bekannten ZIP-Datei.  
+Übrigens: Ein Debianpaket ist eigentlich nichts weiter als eine Standard Archivdatei und sogar mit dem `.ar` Kommandozeilenwerkzeug einsehbar und damit vielleicht vergleichbar mit der häufiger bekannten ZIP-Datei.  
 Für weitere Tipps und Hinweise kann man das Analysetool [**lintian**](https://manpages.debian.org/stretch/lintian/lintian.1.en.html) benutzen.
 ```bash
 lintian helloworld-1.0-all.deb

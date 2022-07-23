@@ -26,26 +26,24 @@
 	```
 3. Zum branch 'lokal' wechseln
 	```bash
-	git checkout lokal
-	```
-4. Aus dem Projektquellordner "ProjektC" zum übergeordneten Ordner wechseln
-	```
-	cd ..
+	cd ProjektC          # In das Verzeichnis 'ProjektC' wechseln
+	git checkout lokal   # Den aktuellen Branch wechseln
 	```
 
 #### 3. CodeBuild-Agent ausführen
-1. Laden Sie das [codebuild_build.sh](https://github.com/aws/aws-codebuild-docker-images/blob/master/local_builds/codebuild_build.sh) Skript herunter:
+1. Wechseln Sie in das übergeordnete Verzeichnis, das Ihren Projektquellordner "ProjektC" enthält.
+2. Laden Sie das [codebuild_build.sh](https://github.com/aws/aws-codebuild-docker-images/blob/master/local_builds/codebuild_build.sh) Skript herunter:
 	```bash
 	wget https://raw.githubusercontent.com/aws/aws-codebuild-docker-images/master/local_builds/codebuild_build.sh
 	chmod +x codebuild_build.sh
 	```
-2. Führen Sie das Skript `codebuild_build.sh` aus und geben Sie das Container-Image sowie das Ausgabeverzeichnis und das Quellverzeichnis an.
+3. Führen Sie das Skript `codebuild_build.sh` aus und geben Sie das Container-Image sowie das Ausgabeverzeichnis und das Quellverzeichnis an.
 	```bash
 	#./codebuild_build.sh -i <container-image> -a <output directory> -s <source directory>
 	# Example:
 	./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a /tmp/buildresult/ -s ProjektC
 	```
-3. Wenn alles gut geht, erhalten Sie am Ende einen Exit-Code von 0
+4. Wenn alles gut geht, erhalten Sie am Ende einen Exit-Code von 0
 	```bash
 	echo $?
 	```

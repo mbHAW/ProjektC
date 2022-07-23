@@ -25,9 +25,9 @@
 	git clone https://github.com/mbHAW/ProjektC.git
 	```
 3. Zum branch 'lokal' wechseln
-```bash
-git checkout lokal
-```
+	```bash
+	git checkout lokal
+	```
 4. Aus dem Projektquellordner "ProjektC" zum übergeordneten Ordner wechseln
 	```
 	cd ..

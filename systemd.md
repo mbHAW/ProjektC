@@ -1,4 +1,4 @@
-# Service Management using Systemd
+# Service Management using Systemd[^1]
 - [systemd with multiple execstart](https://github.com/mbHAW/ProjektC/blob/doc/systemd%20with%20multiple%20execstart.md)
 - [systemd custom service](https://github.com/mbHAW/ProjektC/blob/doc/systemd%20custom%20service.md)
 
@@ -80,8 +80,7 @@ sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.
 ```
 
 
-## Links
-https://www.freedesktop.org/software/systemd/man/systemctl.html.  
+[^1]: https://www.freedesktop.org/software/systemd/man/systemctl.html  
 https://www.commandlinux.com/man-page/man5/systemd.service.5.html  
 https://linuxhandbook.com/systemd-list-services/  
 https://www.flatcar-linux.org/docs/latest/setup/systemd/  

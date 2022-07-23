@@ -1,4 +1,4 @@
-# Creating Custom Systemd Service
+# Creating Custom Systemd Service[^1]
 
 Wir müssen eine Datei für unseren neuen Service erstellen, aber es ist ratsam, sicherzustellen, dass keine der vorhandenen Units den Namen hat, den wir unserem neuen Service geben möchten.
 ```bash
@@ -50,7 +50,7 @@ Anschließend muss der Service gestartet werden.
     sudo systemctl status program_name.service
 ```
 
-Weitere Optionen für die Service-Datei (https://www.commandlinux.com/man-page/man5/systemd.service.5.html):
+Weitere Optionen für die Service-Datei:[^2]
 ```bash
     # Description: This is a text description of your service.
     # Wants:       Our service wants — but doesn’t require — the network to be up before our service is started.
@@ -65,8 +65,8 @@ Weitere Optionen für die Service-Datei (https://www.commandlinux.com/man-page/m
     #              whether or not a graphical user interface is available.
 ```
 
-## Links
-https://www.howtogeek.com/687970/how-to-run-a-linux-program-at-startup-with-systemd/  
+[^1]: https://www.howtogeek.com/687970/how-to-run-a-linux-program-at-startup-with-systemd/  
 https://www.devdungeon.com/content/creating-systemd-service-files  
 https://youtu.be/fYQBvjYQ63U  
+[^2]: https://www.commandlinux.com/man-page/man5/systemd.service.5.html
 

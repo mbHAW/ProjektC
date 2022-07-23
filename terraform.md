@@ -1,4 +1,4 @@
-# Terraform
+# Terraform[^1]
 
 ```bash
 terraform init         # Initialize Project...get terraform.tfstate file from remote server if being used
@@ -26,7 +26,6 @@ terraform apply --auto-approve  # Apply the new changes in your project without 
 
 
 
-
 ## Using Shell script in Terraform "user_data"
 [Terraform AWS EC2 user_data example](https://www.middlewareinventory.com/blog/terraform-aws-ec2-user_data-example/) - middlewareinventory.com  
 [Terraform Course demo-10](https://github.com/wardviaene/terraform-course/tree/master/demo-10) - github.com  
@@ -40,8 +39,7 @@ um zu wissen, was da reingehört, wenn man ein aws s3 bucket zum storen von dem 
 [Terraform Settings -> Backends -> Available Backends](https://www.terraform.io/language/settings/backends/s3)  
 Die haben auch gleich die Infos für all die anderen service provider.  
 
-## Links
-[Beginners Tutorial to Terraform with AWS - Wahl Network](https://youtu.be/XxTcw7UTues) - Youtube  
+[^1]: [Beginners Tutorial to Terraform with AWS - Wahl Network](https://youtu.be/XxTcw7UTues) - Youtube  
 [Terraform AWS Example – Create EC2 instance with Terraform](https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/) - middlewareinventory.com  
 [ec2-instance-connect](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-set-up.html) - docs.aws.amazon.com  
 [Terraform AWS EC2 user_data example](https://www.middlewareinventory.com/blog/terraform-aws-ec2-user_data-example/) - middlewareinventory.com  

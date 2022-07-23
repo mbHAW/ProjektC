@@ -1,4 +1,4 @@
-# FPM
+# FPM[^1]
 
 - [deb](https://github.com/mbHAW/ProjektC/blob/doc/deb.md)
 - [systemd](https://github.com/mbHAW/ProjektC/blob/doc/systemd.md)
@@ -8,18 +8,6 @@ FPM wird inzwischen von vielen Entwicklerstudios verwendet. Z.B. von InfluxData 
 Das Anlegen einer Ordnerstruktur ist ebenfalls nicht nötig. Alle Quelldateien werden zusammen in einen Ordner gelegt und das Programm FPM von dort aus gestartet.
 
 ### Installation
-
-```bash
-# RedHat based distros (sometimes 'dnf' instead of 'yum')
-yum update
-yum install -y squashfs-tools
-gem install fpm
-fpm --version
-
-# Just to feel save that all rpm-build packages are installed
-yum install -y rpm-build
-yum install -y rpm* gcc gpg* rng-tools
-```
 
 ```bash
 # Ubuntu/Debian based distros
@@ -33,6 +21,18 @@ apt install rpm
 
 # If the program can't be found, then it's possible that the PATH variable just hasn't been updated yet. See `echo $PATH`
 # You can either restart the system or just reload the .profile file `source ~/.profile`
+```
+
+```bash
+# RedHat based distros (sometimes 'dnf' instead of 'yum')
+yum update
+yum install -y squashfs-tools
+gem install fpm
+fpm --version
+
+# (Optional) Making sure that all rpm-build packages are installed
+yum install -y rpm-build
+yum install -y rpm* gcc gpg* rng-tools
 ```
 
 ```bash
@@ -136,8 +136,7 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-### Links:
-https://fpm.readthedocs.io/en/latest/index.html  
+[^1]: https://fpm.readthedocs.io/en/latest/index.html  
 https://fpm.readthedocs.io/en/latest/installation.html  
 https://fpm.readthedocs.io/en/latest/cli-reference.html  
 https://github.com/jordansissel/fpm  

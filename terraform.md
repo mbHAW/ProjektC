@@ -33,7 +33,7 @@ Die Option "user_data" eröffnet die Möglichkeit, zusammen mit der AWS-Instance
 Dies erlaubt Systemadministratoren, die bereits Erfahrung mit einer Linux-Konsole haben, Teile des Setups in gewohnten Umgebung zu erstellen, bzw. die letzte Feinjustierung vorzunehmen.
 Wenn mit Terraform nur noch eine ganz simple Standard-Instance erstellen braucht und man alle weiteren Optionen mit einem Shellscript bewerkstellen kann, so vereinfacht es dem Terraform-Neuling etwas den Einstieg.  
 
-Beispiele:
+**Beispiele:**  
 [Terraform AWS EC2 user_data example](https://www.middlewareinventory.com/blog/terraform-aws-ec2-user_data-example/) - middlewareinventory.com  
 [Terraform Course demo-10](https://github.com/wardviaene/terraform-course/tree/master/demo-10) - github.com  
 [How to use terraform with user_data and cloudinit() on AWS](https://linuxinuse.com/devopsblog/use-terraform-modules/) - linuxinuse.com  

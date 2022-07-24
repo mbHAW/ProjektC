@@ -83,15 +83,11 @@ Will man lokal gerne das Endprodukt in einzelne Dateien getrennt erhalten, so bi
 
 ## Für das Deployment auf dem Remote-Server ist außerdem der Ordner "terraform-build" mit den Terraform-Dateien nötig.
 
-Rein Theoretisch könnte man alle Einstellungen und Variablen in nur einer einzigen Terraformdatei unterbringen. Allerdings würde das die Lesbarkeit erheblich erschweren, weshalb man in fast allen Projekten die Unterteilung in kleiner Dateien beobachten wird. Terraform ist es darüber hinaus egal, wie die Dateien benannt werden, da es einfach alle Dateien mit der Endung .tf einliest und ausführt, als handelte es sich nur um eine einzige Konfigurationsdatei. Dass jeder Programmierer seine eigenen Vorlieben hat, kann einem Beginner natürlich den Einstieg erschweren erschweren, da ihm nicht sofort ersichtlich ist, dass tatsächlich nur der Inhalt der Datei zählt und es darüber hinaus gar kein festes System gibt. Lediglich speziell als lokale Variablen deklirierte Werte werden nur von Codezeilen der selben Datei erkannt.
-
-**Springe zum Abschnitt:**
-- [codebuild.tf](#codebuildtf)
-- [iam.tf](#iamtf2)
-- [main.tf](#maintf)
-- [s3.tf](#s3tf)
-- [vars.tf](#varstf)
-___
+Rein Theoretisch könnte man alle Einstellungen und Variablen in nur einer einzigen Terraformdatei unterbringen. Allerdings würde das die Lesbarkeit erheblich erschweren,
+weshalb man in fast allen Projekten die Unterteilung in kleinere Dateien beobachten wird. Terraform ist es darüber hinaus egal, wie die Dateien benannt werden,
+da es einfach alle Dateien mit der Endung .tf einliest und ausführt, als handelte es sich nur um eine einzige Konfigurationsdatei.
+Dass jeder Programmierer seine eigenen Vorlieben hat, kann einem Beginner natürlich den Einstieg erschweren, da ihm nicht sofort ersichtlich ist,
+dass tatsächlich nur der Inhalt der Datei zählt und es darüber hinaus gar kein festes System gibt. Lediglich speziell als lokale Variablen deklirierte Werte werden nur von Codezeilen der selben Datei erkannt.
 
 #### Ordnerstruktur des vollständigen Projekts:
 ```sh
@@ -111,6 +107,14 @@ ProjektC/
     ├── vars.tf
     └── .gitignore
 ```
+
+**Springe zum Abschnitt:**
+- [codebuild.tf](#codebuildtf)
+- [iam.tf](#iamtf1)
+- [main.tf](#maintf)
+- [s3.tf](#s3tf)
+- [vars.tf](#varstf)
+___
 
 #### codebuild.tf
 
@@ -158,7 +162,7 @@ Sofern CodePipeline nicht verwendet wird, kann die Option `packaging = "NONE"` v
 
 Da sich sowohl Syntax, also auch Befehle von Version zu Version ändern können und da jedes Projekt anders ist, wird man nicht umhin kommen, jeden einzelnen Abschnitt selbst erstellen zu müssen.  
 
-#### iam.tf[^2]
+#### iam.tf[^1]
 ```terraform
 resource "aws_iam_role" "builder_role" {
   name = "helloapp-builder"
@@ -347,7 +351,9 @@ variable "account_id" {
 }
 ```
 
-Diese Datei enthält eine Auflistung von verwendeten Variablen. Sehr häufig findet man außerdem Beispiele, in denen `vars.tf` für die Deklaration von Variablen und Datentypen verwendet wird, diese aber in `profilname.tfvars` gefüllt werden. Über die .tfvars Dateien können im selben Projekt gleich mehrere Umgebung erstellt werden. Welche Umgebung von Terraform behandelt werden soll, lässt sich in der Befehlszeile über ein zusätzliches Argument bestimmen. ([s.unten](#AnlegenvonWorkspaces3optional))
+Diese Datei enthält eine Auflistung von verwendeten Variablen. Sehr häufig findet man außerdem Beispiele, in denen `vars.tf` für die Deklaration von Variablen und Datentypen verwendet wird,
+diese aber in `profilname.tfvars` gefüllt werden. Über die .tfvars Dateien können im selben Projekt gleich mehrere Umgebung erstellt werden. Welche Umgebung von Terraform behandelt werden soll,
+lässt sich in der Befehlszeile über ein zusätzliches Argument bestimmen. ([s.unten](#anlegen-von-workspaces2-optional))
 
 #### .gitignore
 ```bash
@@ -403,7 +409,7 @@ Dabei ist zu beachten, dass man das State-File möglichst niemals auf Github mit
 Das Projekt wurde jetzt automatisch auf dem AWS-Server erstellt und CodeBuild sollte sich ganz einfach über einen Klick auf den *"Start build"*-Button in der Webansicht starten lassen. Das kompilierte Programm liegt danach in dem dafür eigens generierten S3-Bucket. CodeBuild holt sich ab jetzt bei jedem Build immer den jeweils aktuellsten Stand aus dem Github-Repository.
 ![codebuild.png](pics/codebuild.png)
 
-## Anlegen von Workspaces[^3] (optional)
+## Anlegen von Workspaces[^2] (optional)
 Workspaces sind teilweise vergleichbar mit der Idee von Branches auf Github. Durch die Nutzung von einem Workspace "dev" und einem Workspace "prod" lassen sich die Arbeitsumgebungen "Entwicklung" und "Produktion/Release" in unterschiedliche Accounts trennen, allerdings mit dem Vorteil, dass man nicht für jeden Account einen eigenen Projektordner anlegen muss. Die Dateien bleiben ja die Selben. Nur der Destinationsort auf dem Server ist ein anderer. (Der Workspace "default" ist übrigens immer da und lässt sich auch nicht löschen.)
 Der einzige Unterschied zwischen diesen Umgebungen sind dabei lediglich das State-File und die Variablenwerte.
 ```bash
@@ -441,5 +447,5 @@ https://aws.amazon.com/codebuild/pricing/
 
 
 
-[^2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codebuild_project
-[^3]: https://stackoverflow.com/questions/66979732/in-terraform-is-it-possible-to-move-to-state-from-one-workspace-to-another https://dev.to/igordcsouzaaa/migrating-resources-from-the-default-workspace-to-a-new-one-3ojc https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces.html https://betterprogramming.pub/managing-multiple-environments-in-terraform-5b389da3a2ef
+[^1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codebuild_project
+[^2]: https://stackoverflow.com/questions/66979732/in-terraform-is-it-possible-to-move-to-state-from-one-workspace-to-another https://dev.to/igordcsouzaaa/migrating-resources-from-the-default-workspace-to-a-new-one-3ojc https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces.html https://betterprogramming.pub/managing-multiple-environments-in-terraform-5b389da3a2ef

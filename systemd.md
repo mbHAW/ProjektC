@@ -3,8 +3,7 @@
 - [systemd custom service](https://github.com/mbHAW/ProjektC/blob/doc/systemd%20custom%20service.md)
 
 **VIEW systemd/unit INFORMATION**  
-Units can be written both like this `unit_name.service` or like this `unit_name`.  
-You can usually find them at `/etc/systemd/system/` and `/usr/lib/systemd/system/`.
+Units can be written both like this `unit_name.service` or like this `unit_name`. You can usually find them at `/etc/systemd/system/` and `/usr/lib/systemd/system/`.
 ```bash
 # Show all running services:
 systemctl status

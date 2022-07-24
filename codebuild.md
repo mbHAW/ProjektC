@@ -26,17 +26,17 @@ Die Verwendung von [Terraform](https://registry.terraform.io/providers/hashicorp
 In diesem Fall bedienen wir uns der Hilfe von Terraform für das AWS-Projekt und Docker für den lokal durchgeführten Test.
 
 Es ist vorteilhaft, dass man den Prozess, den man später nach AWS verschieben möchte, vorher schon einmal auf dem eigenen Rechner auf Funktionalität testen kann.
-Das Einzige, was Codebuild dafür benötigt ist lediglich der Projektordner mit den Source-Dateien und eine Konfigurationsdatei mit der Bezeichnung "buildspec.yml", welche CodeBuild den Arbeitsablauf mitteilt.
+Das Einzige, was Codebuild dafür benötigt, ist lediglich der Projektordner mit den Source-Dateien und eine Konfigurationsdatei mit der Bezeichnung "buildspec.yml", welche "CodeBuild" den Arbeitsablauf mitteilt.
 Das Projekt für den lokalen Build-Test ist zu finden im Branch [lokal](https://github.com/mbHAW/ProjektC/tree/lokal).
 
 
 ## buildspec.yml
 In dieser Konfugurationsdatei wird der gesamte Ablauf der Build-Prozesses definiert. Dabei ist es nicht zwingend notwendig, jeden Schritt genauso, wie hier zu befolgen.
-Beispielsweise könnte man auch den Abschnitt "install:" weglassen und die Kommandozeilen unter "pre_build:" hinzufügen. (Manchmal tut es aber der Übersichtlichkeit gut, wenn die Prozesse in klare Abschnitte unterteilt werden.)
-Bei jedem Build wird zuerst die aktuellste, oder in diesem Fall die angegebene Version (1.13) der Programmiersprache installiert.
-Der Abschnitt "build:" enthälten die Codezeilen, die für dei Kompilierung notwendig sind. "makefpm" ist dabei ein Shellscript, das das Terminalprogramm "fpm" gleich mehrfach aufruft, da gleich zwei Versionen des Programms "helloapp" erstellt werden sollen.
-Im Abschnitt "artifacts" werden die fertigen Dateien angegeben, die im Anschluss auf den Build-Prozess auf dem PC (oder später im S3-Bucket) gespeichert werden sollen.
-"helloapp" ist hier die rohe Binärdatei. Gerade am Anfang erleichtert es möglicherweise den Testvorgang, da man das Programm nicht erst installieren muss um es auf dem PC ausführen zu können.
+Beispielsweise könnte man auch den Abschnitt `install:` weglassen und die Kommandozeilen unter `pre_build:` hinzufügen. (Manchmal tut es aber der Übersichtlichkeit gut, wenn die Prozesse in klare Abschnitte unterteilt werden.)
+Bei jedem Build wird zuerst die aktuellste, oder in diesem Fall die Version 1.13 der gewünschten Programmiersprache installiert.
+Der Abschnitt `build:` enthälten die Codezeilen, die für dei Kompilierung notwendig sind. `makefpm` ist dabei ein Shellscript, welches das Terminalprogramm `fpm` gleich mehrfach aufruft, da nämlich zwei Versionen des Programms `helloapp` erstellt werden sollen.
+Im Abschnitt `artifacts` werden die fertigen Dateien angegeben, die im Anschluss auf den Build-Prozess auf dem PC (oder später im S3-Bucket) gespeichert werden sollen.
+Gerade am Anfang erleichtert es möglicherweise den Testvorgang, wenn man die rohe Binärdatei `helloapp` mit ausgibt, weil man sich nach jeder Neu-Kompilierung so den Installationsschritt als Entwickler sparen kann.
 Die zwei anderen Dateien sind die fertigen Installationspakete, die zusätzliche Instruktionen für das jeweilige Betriebssystem enthalten.
 ```yaml
 version: 0.2

@@ -2,9 +2,15 @@
 
 Wir müssen eine Datei für unseren neuen Service erstellen, aber es ist ratsam, sicherzustellen, dass keine der vorhandenen Units den Namen hat, den wir unserem neuen Service geben möchten.
 ```bash
-    # Check the process tree with the "pstree -c" command.
+    # Check Services
     sudo systemctl list-unit-files --type=service
 
+    # Check the process tree
+    pstree -c
+```
+
+Danach wird die .service Datei erstellt.
+```bash
     # Create service file
     sudo nano /etc/systemd/system/program_name.service
 

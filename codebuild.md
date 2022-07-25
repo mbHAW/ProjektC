@@ -21,7 +21,6 @@ weshalb CodePipeline hier nur am Rande erwähnt werden soll.
 
 Als nachteilig ist z.B. die fehlende Unsterstützung für die Kompilierung von C# Scripten zu erwähnen. Githubs CodeBuild-Alternative unterstützt wiederum auch C#, wodurch es für einige Entwickler vielleicht attraktiver erscheint,
 als AWS Services. Allerdings hat man natürlich nicht immer die Möglichkeit über die Wahl der Werkzeuge zu entscheiden, wenn die eigene Firma bereits Lizenzen für das eine oder andere Tool besitzt.
-Für die meisten Anwendungsfälle ist AWS allerdings ein hervorragendes Produkt.
 
 **Ein neues Build-Projekt anlegen:**  
 Es gibt, wie überall auf AWS, gleich [mehrere](https://docs.aws.amazon.com/de_de/codebuild/latest/userguide/create-project.html) Möglichkeiten, ein neues Projekt anzulegen.  

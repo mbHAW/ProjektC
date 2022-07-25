@@ -31,7 +31,7 @@ Die Verwendung von [Terraform](https://registry.terraform.io/providers/hashicorp
 In diesem Fall bedienen wir uns der Hilfe von Terraform für das AWS-Projekt und Docker für den lokal durchgeführten Test.
 
 Es ist vorteilhaft, dass man den Prozess, den man später nach AWS verschieben möchte, vorher schon einmal auf dem eigenen Rechner auf Funktionalität testen kann.
-So lassen sich rechtzeitig Bugs diagnostizieren, bevor der Buildprozess auf Amazon Geld kostet und man erst danach merkt, dass etwas noch nicht funktioniert. https://aws.amazon.com/codebuild/pricing/
+So lassen sich rechtzeitig Bugs diagnostizieren, bevor der Buildprozess auf Amazon [Geld kostet](https://aws.amazon.com/codebuild/pricing/) und man erst danach merkt, dass etwas noch nicht funktioniert.
 Das Einzige, was Codebuild dafür benötigt, ist lediglich der Projektordner mit den Source-Dateien und eine Konfigurationsdatei mit der Bezeichnung "buildspec.yml", welche "CodeBuild" den Arbeitsablauf mitteilt.
 Das Projekt für den lokalen Build-Test ist zu finden im Branch [lokal](https://github.com/mbHAW/ProjektC/tree/lokal).
 

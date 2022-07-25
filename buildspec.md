@@ -275,7 +275,7 @@ artifacts:
 ```
 [Change Artifact Names](https://docs.aws.amazon.com/codebuild/latest/userguide/sample-buildspec-artifact-naming.html) - docs.aws.amazon.com  
 [Change Artifact Names - first enable the option on AWS](https://stackoverflow.com/questions/65589025/how-to-store-codebuild-output-artifact-in-s3-bucket-folder-with-the-folder-name) - stackoverflow.com  
-Dass der Artifact-Name verändert werden kann muss erst noch auf AWS erlaubt werden. Aber auch das geht mit Terraform.  
+Dass der Artifact-Name verändert werden kann, muss erst noch auf AWS erlaubt werden. Aber auch das geht mit Terraform.  
 Hier ein Beispiel aus der Datei codebuild.tf:
 ```terraform
 resource "aws_codebuild_project" "helloapp" {

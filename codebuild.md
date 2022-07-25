@@ -15,7 +15,13 @@ Aktualisierungen, Skalierungen, Sicherheits-Snapshots, Logging und andere zeitra
 
 Die Projektdateien, die in einem Github-Repository oder auch auf AWS selber liegen können, werden von CodeBuild geholt und gemäß der Einstellungen bearbeitet und kompiliert. Anschließend werden die fertigen Projektdateien in einem S3-Bucket (das ist in gewisser Weise einfach ein Cloudspeicher) gesichert und stehen dann z.B. zum Download bereit.
 
-AWS stellt außerdem auch noch einen Service, Namens [CodePipeline](https://docs.aws.amazon.com/de_de/codebuild/latest/userguide/how-to-create-pipeline.html) zur Verfügung, der dafür vorgesehen ist, zusammen mit CodeBuild verwendet zu werden um ein noch höheres Maß an Automatisierung zu erreichen. Für dieses Projekt ist CodeBuild für sich allein aber vollkommen ausreichend, weshalb CodePipeline hier nur am Rande erwähnt werden soll.
+AWS stellt außerdem auch noch einen Service, Namens [CodePipeline](https://docs.aws.amazon.com/de_de/codebuild/latest/userguide/how-to-create-pipeline.html) zur Verfügung, der dafür vorgesehen ist,
+zusammen mit CodeBuild verwendet zu werden um ein noch höheres Maß an Automatisierung zu erreichen. Für dieses Projekt ist CodeBuild für sich allein aber vollkommen ausreichend,
+weshalb CodePipeline hier nur am Rande erwähnt werden soll.
+
+Als nachteilig ist z.B. die fehlende Unsterstützung für die Kompilierung von C# Scripten zu erwähnen. Githubs CodeBuild-Alternative unterstützt wiederum auch C#, wodurch es für einige Entwickler vielleicht attraktiver erscheint,
+als AWS Services. Allerdings hat man natürlich nicht immer die Möglichkeit über die Wahl der Werkzeuge zu entscheiden, wenn die eigene Firma bereits Lizenzen für das eine oder andere Tool besitzt.
+Für die meisten Anwendungsfälle ist AWS allerdings ein hervorragendes Produkt.
 
 **Ein neues Build-Projekt anlegen:**  
 Es gibt, wie überall auf AWS, gleich [mehrere](https://docs.aws.amazon.com/de_de/codebuild/latest/userguide/create-project.html) Möglichkeiten, ein neues Projekt anzulegen.  
@@ -26,15 +32,16 @@ Die Verwendung von [Terraform](https://registry.terraform.io/providers/hashicorp
 In diesem Fall bedienen wir uns der Hilfe von Terraform für das AWS-Projekt und Docker für den lokal durchgeführten Test.
 
 Es ist vorteilhaft, dass man den Prozess, den man später nach AWS verschieben möchte, vorher schon einmal auf dem eigenen Rechner auf Funktionalität testen kann.
+So lassen sich rechtzeitig Bugs diagnostizieren, bevor der Buildprozess auf Amazon Geld kostet und man erst danach merkt, dass etwas noch nicht funktioniert. https://aws.amazon.com/codebuild/pricing/
 Das Einzige, was Codebuild dafür benötigt, ist lediglich der Projektordner mit den Source-Dateien und eine Konfigurationsdatei mit der Bezeichnung "buildspec.yml", welche "CodeBuild" den Arbeitsablauf mitteilt.
 Das Projekt für den lokalen Build-Test ist zu finden im Branch [lokal](https://github.com/mbHAW/ProjektC/tree/lokal).
 
 
 ## buildspec.yml
-In dieser Konfugurationsdatei wird der gesamte Ablauf der Build-Prozesses definiert. Dabei ist es nicht zwingend notwendig, jeden Schritt genauso, wie hier zu befolgen.
+In dieser Konfugurationsdatei wird der gesamte Ablauf des Build-Prozesses definiert. Dabei ist es nicht zwingend notwendig, jeden Schritt genauso wie hier zu befolgen.
 Beispielsweise könnte man auch den Abschnitt `install:` weglassen und die Kommandozeilen unter `pre_build:` hinzufügen. (Manchmal tut es aber der Übersichtlichkeit gut, wenn die Prozesse in klare Abschnitte unterteilt werden.)
-Bei jedem Build wird zuerst die aktuellste, oder in diesem Fall die Version 1.13 der gewünschten Programmiersprache installiert.
-Der Abschnitt `build:` enthälten die Codezeilen, die für dei Kompilierung notwendig sind. `makefpm` ist dabei ein Shellscript, welches das Terminalprogramm `fpm` gleich mehrfach aufruft, da nämlich zwei Versionen des Programms `helloapp` erstellt werden sollen.
+Bei jedem Build wird zuerst die aktuellste oder in diesem Fall die Version 1.13 der gewünschten Programmiersprache installiert.
+Der Abschnitt `build:` enthälten die Codezeilen, die für die Kompilierung notwendig sind. `makefpm` ist dabei ein Shellscript, welches das Terminalprogramm `fpm` gleich mehrfach aufruft, da nämlich zwei Versionen des Programms `helloapp` erstellt werden sollen.
 Im Abschnitt `artifacts` werden die fertigen Dateien angegeben, die im Anschluss auf den Build-Prozess auf dem PC (oder später im S3-Bucket) gespeichert werden sollen.
 Gerade am Anfang erleichtert es möglicherweise den Testvorgang, wenn man die rohe Binärdatei `helloapp` mit ausgibt, weil man sich nach jeder Neu-Kompilierung so den Installationsschritt als Entwickler sparen kann.
 Die zwei anderen Dateien sind die fertigen Installationspakete, die zusätzliche Instruktionen für das jeweilige Betriebssystem enthalten.
@@ -159,7 +166,9 @@ resource "aws_codebuild_source_credential" "github_credential" {
 }
 ```
 
-Sofern CodePipeline nicht verwendet wird, kann die Option `packaging = "NONE"` verwendet werden. Das hat zur Folge, dass alle Produkte des Build-Prozesses unkomprimiert nebeneinaner im gleichen Ordner liegen werden, womit man vor Allem im Entwicklungsstadium viel Ärger vermeiden kann, weil anstatt einer großen Zippdatei, die jedes mal erst entpackt werden müsste, nur noch die tatsächlich benötigte Datei heruntergeladen zu werden braucht. Die Angabe `source_version = "main"` bezieht sich auf den Github-Branch. Man könnte hier beispielsweise auch einen Branch `dev` verwenden.
+Sofern CodePipeline nicht verwendet wird, kann die Option `packaging = "NONE"` verwendet werden. Das hat zur Folge, dass alle Produkte des Build-Prozesses unkomprimiert nebeneinaner im gleichen Ordner liegen werden,
+womit man vor allem im Entwicklungsstadium viel Ärger vermeiden kann, weil anstatt einer großen Zippdatei, die jedes Mal erst entpackt werden müsste, nur noch die tatsächlich benötigte Datei heruntergeladen zu werden braucht.
+Die Angabe `source_version = "main"` bezieht sich auf den Github-Branch, in dem sich die Source-Dateien befinden. Man könnte hier beispielsweise auch einen Branch `dev` verwenden.
 
 Da sich sowohl Syntax, also auch Befehle von Version zu Version ändern können und da jedes Projekt anders ist, wird man nicht umhin kommen, jeden einzelnen Abschnitt selbst erstellen zu müssen.  
 
@@ -306,9 +315,14 @@ provider "aws" {
 }
 ```
 
-Die Datei main.tf enthält die Informationen für das S3-Backend, ohne das Terraform nicht weiß, wo sich die .tfstate Datei befindet, die alle "Speicherstände" des Projektes (bzw. der einzelnen Workspaces) aufzeichnet. Das State-File sollte unbedingt gesichert werden. Wenn man als Entwickler alleine an einem Projekt arbeitet, kann man diese Datei tatsächlich lokal auf dem eigenen PC in dem .terraform Ordner belassen, sofern man für das Projekt ein Backup irgendeiner Art erstellt hat.
-In diesem Fall wird die .tfstate Datei aber auf dem AWS-Projektserver im S3-Bucket "projektc-dev-terraform-state" gespeichert, damit auch andere Entwickler an dem Projekt mitarbeiten können. [Terraform.io](https://www.terraform.io/cloud-docs/workspaces/state) ermöglicht ebenfalls die Sicherung der State-Datei, und unterstützt die Option, auch anderen Services den Zugriff auf diese zu ermöglichen.
-Die Zeile `profile = "projektc-dev"` ist für den AWS-Clienten (aws-cli) notwendig, damit es weiß, welches Profile es verwenden soll. AWS CLI kann schließlich für eine ganze Reihe anderer Aufgaben verwendet werden. Diese können z.B. ausschließlich Logging-Tasks sein, bei denen Metrics und Logs zu AWS CloudWatch gesendet werden. Bei so vielen Accounts und Anwendungsfällen ist es nicht ungewöhnlich, dass ein einzelner Entwickler drei oder vier verschiedene Profile definiert hat, die sich auf Linux-Betriebssystemen im Home-Verzeichnis unter ~/.aws befinden.
+Die Datei main.tf enthält die Informationen für das S3-Backend, ohne das Terraform nicht weiß, wo sich die .tfstate Datei befindet, die alle "Speicherstände" des Projektes (bzw. der einzelnen Workspaces) aufzeichnet.
+Das State-File sollte unbedingt gesichert werden. Wenn man als Entwickler alleine an einem Projekt arbeitet, kann man diese Datei tatsächlich lokal auf dem eigenen PC in dem .terraform Ordner belassen,
+sofern man für das Projekt ein Backup irgendeiner Art erstellt hat.
+In diesem Fall wird die .tfstate Datei aber auf dem AWS-Projektserver im S3-Bucket "projektc-dev-terraform-state" gespeichert, damit auch andere Entwickler an dem Projekt mitarbeiten können.
+[Terraform.io](https://www.terraform.io/cloud-docs/workspaces/state) ermöglicht ebenfalls die Sicherung der State-Datei und unterstützt die Option, auch anderen Services den Zugriff auf diese zu ermöglichen.
+Die Zeile `profile = "projektc-dev"` ist für den AWS-Client (aws-cli) notwendig, damit es weiß, welches "Profile" es verwenden soll. AWS CLI kann schließlich für eine ganze Reihe anderer Aufgaben verwendet werden.
+Diese können z.B. Logging-Tasks sein, bei denen Metrics und Logs zu AWS CloudWatch gesendet werden. Bei so vielen Accounts und Anwendungsfällen ist es nicht ungewöhnlich,
+dass ein einzelner Entwickler drei oder vier verschiedene Profile definiert hat, die sich auf Linux-Betriebssystemen im Home-Verzeichnis unter ~/.aws befinden.
 
 #### s3.tf
 ```terraform
@@ -366,7 +380,8 @@ lässt sich in der Befehlszeile über ein zusätzliches Argument bestimmen. ([s.
 !.gitignore
 ```
 
-Es ist empfehlenswert, dass man gleich zum Projektbeginn in einer .gitignore Datei definiert, dass der versteckte Ordner .terraform nicht nach Github verschoben werden darf, da sich in diesem die sensible State-Datei befindet. Andernfalls wird die Information in der Github-Historie gespeichert und ist wahrscheinlich schwer zu entfernen.
+Es ist empfehlenswert, dass man gleich zum Projektbeginn in einer .gitignore Datei definiert, dass der versteckte Ordner .terraform nicht nach Github verschoben werden darf,
+da sich in diesem die sensible State-Datei befindet. Andernfalls wird die Information in der Github-Historie gespeichert und ist wahrscheinlich schwer zu entfernen.
 ___
 
 
@@ -403,11 +418,14 @@ Ist das Projekt initialisiert, können wir den aktuellen Projektstand jetzt auf 
 ```bash
 terraform apply
 ```
-Der Befehl ist dabei zum Glück recht ungefährlich, da alle neuen Veränderungen, die durch die Terraform-Dateien bewirkt werden sollen, zuerst in der Konsole angezeigt werden und eine Bestätigung durch den Benutzer erwartet wird, bevor tatsächlich etwas zum Server gesendet wird. Für weitere Terraform-Befehle siehe [hier](https://github.com/mbHAW/ProjektC/blob/doc/terraform.md).
+Der Befehl ist dabei zum Glück recht ungefährlich, da alle neuen Veränderungen, die durch die Terraform-Dateien bewirkt werden sollen, zuerst in der Konsole angezeigt werden und eine Bestätigung durch den Benutzer erwartet wird,
+bevor tatsächlich etwas zum Server gesendet wird. Für weitere Terraform-Befehle siehe [hier](https://github.com/mbHAW/ProjektC/blob/doc/terraform.md).
 Wurde kein Remote-S3-Container für die Speicherung der Datei *"terraform.tfstate"* angegeben, so wird diese lokal im Ordner *"terraform-build"* erstellt.
-Dabei ist zu beachten, dass man das State-File möglichst niemals auf Github mitveröffentlicht, da diese Datei sensible Daten enthält. Am einsfachsten ist es da, eine *".gitignore"*-Datei im Projektordner anzulegen, die die Zeile `.terraform` enthält (s.o.). Damit wird dieser Ordner von Git ignoriert.
+Dabei ist zu beachten, dass man das State-File möglichst niemals auf Github mitveröffentlicht, da diese Datei sensible Daten enthält. Am einfachsten ist es da, eine *".gitignore"*-Datei im Projektordner anzulegen,
+die die Zeile `.terraform` enthält (s.o.). Damit wird dieser Ordner von Git ignoriert.
 
-Das Projekt wurde jetzt automatisch auf dem AWS-Server erstellt und CodeBuild sollte sich ganz einfach über einen Klick auf den *"Start build"*-Button in der Webansicht starten lassen. Das kompilierte Programm liegt danach in dem dafür eigens generierten S3-Bucket. CodeBuild holt sich ab jetzt bei jedem Build immer den jeweils aktuellsten Stand aus dem Github-Repository.
+Das Projekt wurde jetzt automatisch auf dem AWS-Server erstellt und CodeBuild sollte sich ganz einfach über einen Klick auf den *"Start build"*-Button in der Webansicht starten lassen.
+Das kompilierte Programm liegt danach in dem dafür eigens generierten S3-Bucket. CodeBuild holt sich ab jetzt bei jedem Build immer den jeweils aktuellsten Stand aus dem Github-Repository.
 ![codebuild.png](pics/codebuild.png)
 
 ## Anlegen von Workspaces[^2] (optional)
@@ -430,16 +448,12 @@ Es wird allerdings im Internet häufig lieber empfohlen, dass man Produktions- u
 
 ***
 
-### Links:
+### Weitere Links:
 - [AWS CodeBuild Tutorial](https://youtu.be/qGgNyOkZEb0) Stephane Maarek - Youtube
 - [Why Run Terraform inside AWS Codebuild](https://github.com/giuseppeborgese/run-terraform-inside-aws-codebuild) - github.com
 - [Resource: aws_codebuild_project](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codebuild_project) - registry.terraform.io
 - [All the AWS CodeBuild You Can Stomach in 45 Minutes](https://youtu.be/yCVR-uqc4qk) - Youtube, [Github Code mit PDF-Präsentation](https://github.com/krimple/ptw-2020-codebuild-sample) - Github
-- A cloud-based application builder
-- Warum am Besten immer erst lokal ausprobieren?
-Weil man so rechtzeitig Bugs diagnostizieren kann, bevor der Buildprozess auf Amazon Geld kostet und man erst danach merkt, dass etwas noch nicht funktioniert.
-https://aws.amazon.com/codebuild/pricing/
-- Als nachteilig ist z.B. die fehlende Unsterstützung für die Kompilierung von C# Scripten zu erwähnen. Diese werden von aws codebuild, zumindest von Haus aus, noch nicht unterstützt. Githubs CodeBuild-Alternative wiederum unterstützt auch C#, wodurch es für einige Entwickler vielleicht attraktiver erscheint, als AWS Services. Allerdings hat man natürlich nicht immer die Möglichkeit über die Wahl der Werkzeuge zu entscheiden, wenn die eigene Firma bereits Lizenzen für das eine oder andere Tool besitzt. Für die meisten Anwendungsfälle ist AWS allerdings ein hervorragendes Produkt. [Using GitHub Actions vs {AWS CodeBuild, CodePipeline and CodeDeploy} | Cloud Posse Explains](https://youtu.be/lV3BV5bkCj4) - Youtube
+- [Using GitHub Actions vs {AWS CodeBuild, CodePipeline and CodeDeploy} | Cloud Posse Explains](https://youtu.be/lV3BV5bkCj4) - Youtube
 - Auch interessant: [CICD](https://youtu.be/N9KbmHhesmE)
 - [CodeBuild-Type-ProjectArtifacts-packaging](https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ProjectArtifacts.html#CodeBuild-Type-ProjectArtifacts-packaging) - docs.aws.amazon.com  
 - [Can AWS CodeBuild output unzipped artifacts?](https://stackoverflow.com/questions/57336854/can-aws-codebuild-output-unzipped-artifacts) - stackoverflow.com  

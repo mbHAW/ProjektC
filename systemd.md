@@ -94,7 +94,7 @@ journalctl
 # See network service messages
 journalctl -u network.service
 
-# Follor messages as they appear
+# Follow messages as they appear
 journalctl -f
 
 # Show only kernel messages

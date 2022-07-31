@@ -2,7 +2,9 @@
 - [systemd with multiple execstart](https://github.com/mbHAW/ProjektC/blob/doc/systemd%20with%20multiple%20execstart.md)
 - [systemd custom service](https://github.com/mbHAW/ProjektC/blob/doc/systemd%20custom%20service.md)
 
-**VIEW systemd/unit INFORMATION**  
+Most systemd commands can work with these unit types:  
+`services, paths, slices, snapshots, sockets, swaps, targets, timers`  
+
 Units can be written both like this `unit_name.service` or like this `unit_name`. You can usually find them at `/etc/systemd/system/` and `/usr/lib/systemd/system/`.
 ```bash
 # Show all running services:
@@ -17,6 +19,9 @@ systemctl reload-or-try-restart unit
 
 # Show the status of a unit:
 systemctl status unit
+
+# Show properties of a unit:
+systemctl show unit
 
 # Enable/Disable a unit to be started on bootup:
 systemctl enable|disable unit
@@ -64,6 +69,36 @@ systemctl list-units --type=target --all
 
 # Display the default target file
 systemctl get-default
+```
+
+Changing System States
+```bash
+# Reboot the system (reboot.target)
+systemctl reboot
+
+# Power off the system (poweroff.target)
+systemctl poweroff
+
+# Put in emergency mode (emergency.target)
+systemctl emergency
+
+# Back to default target (multi-user.target)
+systemctl default
+```
+
+Viewing Log Messages
+```bash
+# Show all collected log messages
+journalctl
+
+# See network service messages
+journalctl -u network.service
+
+# Follor messages as they appear
+journalctl -f
+
+# Show only kernel messages
+journalctl -k
 ```
 
 Managing sleep behavior in Ubuntu
